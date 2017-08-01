@@ -1,0 +1,27 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    // Global
+    "max-len": [2, 120],
+    "func-names": 0,
+    "prefer-arrow-callback": 0,
+
+    // React
+    "react/prefer-stateless-function": 0,
+    "react/prop-types": 0
+  },
+  "extends": [
+    "airbnb",
+    "plugin:jest/recommended"
+  ],
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import",
+    "jest"
+  ],
+  "env": {
+    "browser": true,
+    "jest/globals": true
+  }
+}
