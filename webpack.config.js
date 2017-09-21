@@ -9,6 +9,7 @@ module.exports = {
       'webpack-hot-middleware/client',
       'babel-polyfill',
       join(__dirname, 'client/src/js/index.jsx'),
+      join(__dirname, 'client/src/styles/index.sass'),
     ],
   },
 
