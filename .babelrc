@@ -1,7 +1,28 @@
 {
   "presets": [
-    "env",
+    ["env", {
+      "loose": true,
+      "modules": false
+    }],
     "react",
     "stage-0"
-  ]
+  ],
+  "plugins": [
+    "transform-decorators-legacy"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        ["react-transform", {
+          "transforms": [
+            {
+              "transform": "react-transform-hmr",
+              "imports": ["react"],
+              "locals": ["module"]
+            }
+          ]
+        }
+      ]]
+    }
+  }
 }

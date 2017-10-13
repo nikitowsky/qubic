@@ -1,5 +1,6 @@
 const { join } = require('path');
 const { HotModuleReplacementPlugin } = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -8,13 +9,13 @@ module.exports = {
     bundle: [
       'webpack-hot-middleware/client',
       'babel-polyfill',
-      join(__dirname, 'client/src/js/index.jsx'),
-      join(__dirname, 'client/src/styles/index.sass'),
+      join(__dirname, '../client/src/js/index.jsx'),
+      join(__dirname, '../client/src/styles/index.sass'),
     ],
   },
 
   output: {
-    path: join(__dirname, 'client/dist'),
+    path: join(__dirname, '../client/dist'),
     publicPath: '/',
     filename: '[name].js',
   },
@@ -24,7 +25,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: ['react-hot-loader', 'babel-loader'],
+        use: ['babel-loader'],
       },
       {
         test: /\.sass$/,
@@ -39,5 +40,6 @@ module.exports = {
 
   plugins: [
     new HotModuleReplacementPlugin(),
+    new ExtractTextPlugin('style.css'),
   ],
 };

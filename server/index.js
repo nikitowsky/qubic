@@ -10,7 +10,7 @@ if (env !== 'production') {
   const devMiddleware = require('webpack-dev-middleware');
   const hotMiddleware = require('webpack-hot-middleware');
   const webpack = require('webpack');
-  const config = require('../webpack.config');
+  const config = require('../config/webpack.config.dev');
   const compiler = webpack(config);
 
   app.use(devMiddleware(compiler, {
