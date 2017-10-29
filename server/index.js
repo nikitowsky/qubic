@@ -14,8 +14,9 @@ if (env !== 'production') {
   const compiler = webpack(config);
 
   app.use(devMiddleware(compiler, {
-    publicPath: config.output.publicPath,
     historyApiFallback: true,
+    noInfo: true,
+    publicPath: config.output.publicPath,
   }));
 
   app.use(hotMiddleware(compiler));
