@@ -1,6 +1,7 @@
 const { join } = require('path');
 const CompressionPlugin = require('compression-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
   entry: {
     bundle: [
       'babel-polyfill',
-      join(__dirname, '../client/src/js/index.jsx'),
+      join(__dirname, '../client/src/index.jsx'),
       join(__dirname, '../client/src/styles/index.sass'),
     ],
   },
@@ -17,7 +18,7 @@ module.exports = {
   output: {
     path: join(__dirname, '../client/dist'),
     publicPath: '/',
-    filename: '[name].js',
+    filename: '[name].[hash].js',
   },
 
   module: {
@@ -63,7 +64,11 @@ module.exports = {
         comments: false,
       },
     }),
-    new ExtractTextPlugin('style.css'),
+    new ExtractTextPlugin('style.[hash].css'),
+    new HtmlWebpackPlugin({
+      filename: join(__dirname, '../client/dist/index.html'),
+      template: join(__dirname, '../client/src/index.html'),
+    }),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',

@@ -1,35 +1,17 @@
-const { join } = require('path');
+const { resolve } = require('path');
 const express = require('express');
+const expressStaticGzip = require('express-static-gzip');
 
 const app = express();
-const port = process.env.PORT || 3000;
-const env = process.env.NODE_ENV;
+const port = process.env.PORT || 8000;
 
-if (env !== 'production') {
-  /* eslint-disable */
-  const devMiddleware = require('webpack-dev-middleware');
-  const hotMiddleware = require('webpack-hot-middleware');
-  const webpack = require('webpack');
-  const config = require('../config/webpack.config.dev');
-  const compiler = webpack(config);
-
-  app.use(devMiddleware(compiler, {
-    historyApiFallback: true,
-    noInfo: true,
-    publicPath: config.output.publicPath,
-  }));
-
-  app.use(hotMiddleware(compiler));
-  /* eslint-enable */
-}
-
-app.set('views', join(__dirname, '../views'));
-app.set('view engine', 'pug');
-
+app.use(express.static('public'));
 app.use(express.static('client/dist'));
+app.use(expressStaticGzip('public'));
+app.use(expressStaticGzip('client'));
 
 app.get('/*', (req, res) => {
-  res.render('index');
+  res.sendFile(resolve(__dirname, '../client/dist/index.html'));
 });
 
 app.listen(port, (err) => {

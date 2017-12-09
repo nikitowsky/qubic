@@ -8,21 +8,7 @@
     "stage-0"
   ],
   "plugins": [
+    "react-hot-loader/babel",
     "transform-decorators-legacy"
-  ],
-  "env": {
-    "development": {
-      "plugins": [
-        ["react-transform", {
-          "transforms": [
-            {
-              "transform": "react-transform-hmr",
-              "imports": ["react"],
-              "locals": ["module"]
-            }
-          ]
-        }
-      ]]
-    }
-  }
+  ]
 }

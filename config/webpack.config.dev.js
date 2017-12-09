@@ -1,14 +1,14 @@
 const { join } = require('path');
-const { HotModuleReplacementPlugin } = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
 
   entry: {
     bundle: [
-      'webpack-hot-middleware/client',
       'babel-polyfill',
-      join(__dirname, '../client/src/js/index.jsx'),
+      'react-hot-loader/patch',
+      join(__dirname, '../client/src/index.jsx'),
       join(__dirname, '../client/src/styles/index.sass'),
     ],
   },
@@ -38,6 +38,9 @@ module.exports = {
   },
 
   plugins: [
-    new HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: join(__dirname, '../client/src/index.html'),
+    }),
   ],
 };
