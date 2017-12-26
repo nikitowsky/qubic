@@ -6,7 +6,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js",
     "prod": "cross-env NODE_ENV=production node .",
-    "start": "webpack-dev-server --hot --inline --port 8000 --history-api-fallback --no-info --config config/webpack.config.dev.js",
+    "start": "webpack-dev-server --hot --inline --port 8000 --history-api-fallback --no-info --open --config config/webpack.config.dev.js",
     "test": "jest"
   },
   "author": "Nikita Borisowsky",
