@@ -9,7 +9,7 @@ module.exports = {
       'babel-polyfill',
       'react-hot-loader/patch',
       join(__dirname, '../client/src/index.jsx'),
-      join(__dirname, '../client/src/styles/index.sass'),
+      join(__dirname, '../client/src/styles/index.scss'),
     ],
   },
 
@@ -27,8 +27,20 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /\.sass$/,
-        use: ['style-loader', 'css-loader', 'csso-loader', 'postcss-loader', 'sass-loader'],
+        test: /\.s?css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            query: {
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+            },
+          },
+          'csso-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
       },
     ],
   },

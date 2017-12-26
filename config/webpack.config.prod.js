@@ -11,7 +11,7 @@ module.exports = {
     bundle: [
       'babel-polyfill',
       join(__dirname, '../client/src/index.jsx'),
-      join(__dirname, '../client/src/styles/index.sass'),
+      join(__dirname, '../client/src/styles/index.scss'),
     ],
   },
 
@@ -29,10 +29,21 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /\.sass$/,
+        test: /\.s?css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'csso-loader', 'postcss-loader', 'sass-loader'],
+          use: [
+            {
+              loader: 'css-loader',
+              query: {
+                modules: true,
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
+            },
+            'csso-loader',
+            'postcss-loader',
+            'sass-loader',
+          ],
         }),
       },
     ],
