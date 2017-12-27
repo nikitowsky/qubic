@@ -1,6 +1,6 @@
 # Unnecessary foders
 /node_modules
-/client/dist
+/public/dist
 
 # IDE's
 /.atom
