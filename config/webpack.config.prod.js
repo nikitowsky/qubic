@@ -11,12 +11,12 @@ module.exports = {
     bundle: [
       'babel-polyfill',
       join(__dirname, '../client/src/index.jsx'),
-      join(__dirname, '../client/src/styles/index.scss'),
+      join(__dirname, '../client/assets/styles/index.scss'),
     ],
   },
 
   output: {
-    path: join(__dirname, '../client/dist'),
+    path: join(__dirname, '../public/dist'),
     publicPath: '/',
     filename: '[name].[hash].js',
   },
@@ -45,6 +45,13 @@ module.exports = {
             'sass-loader',
           ],
         }),
+      },
+      {
+        test: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader',
+        options: {
+          name: '[sha512:hash:base64:7].[ext]',
+        },
       },
     ],
   },
@@ -77,7 +84,7 @@ module.exports = {
     }),
     new ExtractTextPlugin('style.[hash].css'),
     new HtmlWebpackPlugin({
-      filename: join(__dirname, '../client/dist/index.html'),
+      filename: join(__dirname, '../public/dist/index.html'),
       template: join(__dirname, '../client/src/index.html'),
     }),
     new CompressionPlugin({
