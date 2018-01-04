@@ -29,8 +29,7 @@
     "import",
     "jest",
     "jsx-a11y",
-    "react",
-    "nullishCoaleshingOperator"
+    "react"
   ],
   "env": {
     "browser": true,
