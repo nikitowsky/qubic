@@ -9,7 +9,7 @@ module.exports = {
 
   entry: {
     bundle: [
-      'babel-polyfill',
+      '@babel/polyfill',
       join(__dirname, '../client/src/index.jsx'),
       join(__dirname, '../client/assets/styles/index.scss'),
     ],

@@ -6,7 +6,7 @@ module.exports = {
 
   entry: {
     bundle: [
-      'babel-polyfill',
+      '@babel/polyfill',
       'react-hot-loader/patch',
       join(__dirname, '../client/src/index.jsx'),
       join(__dirname, '../client/assets/styles/index.scss'),
