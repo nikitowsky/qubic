@@ -6,12 +6,12 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 app.use(express.static('public'));
-app.use(express.static('client/dist'));
+app.use(express.static('public/dist'));
 app.use(expressStaticGzip('public'));
 app.use(expressStaticGzip('client'));
 
 app.get('/*', (req, res) => {
-  res.sendFile(resolve(__dirname, '../client/dist/index.html'));
+  res.sendFile(resolve(__dirname, '../public/dist/index.html'));
 });
 
 app.listen(port, (err) => {

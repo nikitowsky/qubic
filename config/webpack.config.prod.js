@@ -1,33 +1,19 @@
-const { join } = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const merge = require('webpack-merge');
+const baseConfig = require('./webpack.config.base');
 
-module.exports = {
-  devtool: 'cheap-module-source-map',
-
-  entry: {
-    bundle: [
-      '@babel/polyfill',
-      join(__dirname, '../client/src/index.jsx'),
-      join(__dirname, '../client/assets/styles/index.scss'),
-    ],
-  },
+const prodConfig = {
+  devtool: 'source-map',
 
   output: {
-    path: join(__dirname, '../public/dist'),
-    publicPath: '/',
     filename: '[name].[hash].js',
   },
 
   module: {
     rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
-      },
       {
         test: /\.s?css$/,
         use: ExtractTextPlugin.extract({
@@ -46,53 +32,23 @@ module.exports = {
           ],
         }),
       },
-      {
-        test: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader',
-        options: {
-          name: '[sha512:hash:base64:7].[ext]',
-        },
-      },
     ],
   },
 
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
-
   plugins: [
+    new CleanWebpackPlugin([
+      'public/dist',
+    ]),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-      },
-      output: {
-        comments: false,
-      },
-    }),
     new ExtractTextPlugin('style.[hash].css'),
-    new HtmlWebpackPlugin({
-      filename: join(__dirname, '../public/dist/index.html'),
-      template: join(__dirname, '../client/src/index.html'),
-    }),
     new CompressionPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
       test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
-      threshold: 10240,
+      algorithm: 'gzip',
+      asset: '[path].gz[query]',
       minRatio: 0.8,
+      threshold: 10240,
     }),
   ],
 };
+
+module.exports = merge.smart(baseConfig, prodConfig);
