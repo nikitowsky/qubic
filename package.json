@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --config config/webpack.config.dev.js",
+    "start": "webpack-dev-server --hot --config config/webpack.config.dev.js",
     "build": "webpack -p --config config/webpack.config.prod.js",
     "prod": "cross-env NODE_ENV=production node .",
     "test": "jest"
@@ -20,7 +20,7 @@
     "normalize.css": "^7.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-hot-loader": "^3.1.3",
+    "react-hot-loader": "^4.0.0-beta.12",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",

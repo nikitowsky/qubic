@@ -4,12 +4,6 @@ const baseConfig = require('./webpack.config.base');
 const devConfig = {
   devtool: 'cheap-module-eval-source-map',
 
-  entry: {
-    bundle: [
-      'react-hot-loader/patch',
-    ],
-  },
-
   devServer: {
     historyApiFallback: true,
     noInfo: true,
@@ -19,4 +13,4 @@ const devConfig = {
   },
 };
 
-module.exports = merge.strategy({ entry: 'prepend' })(baseConfig, devConfig);
+module.exports = merge(baseConfig, devConfig);
