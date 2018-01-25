@@ -1,4 +1,4 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HappyPack = require('happypack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
@@ -14,6 +14,11 @@ const prodConfig = {
 
   module: {
     rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: 'happypack/loader',
+      },
       {
         test: /\.s?css$/,
         use: ExtractTextPlugin.extract({
@@ -36,9 +41,9 @@ const prodConfig = {
   },
 
   plugins: [
-    new CleanWebpackPlugin([
-      'public/dist',
-    ]),
+    new HappyPack({
+      loaders: ['babel-loader'],
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ExtractTextPlugin('style.[hash].css'),
     new CompressionPlugin({

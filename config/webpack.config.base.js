@@ -21,7 +21,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: 'babel-loader',
       },
       {
         test: /\.s?css$/,
@@ -41,10 +41,15 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader',
-        options: {
-          name: '[sha512:hash:base64:7].[ext]',
-        },
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[sha512:hash:base64:7].[ext]',
+            },
+          },
+        ],
       },
     ],
   },

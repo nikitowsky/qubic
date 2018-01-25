@@ -7,7 +7,7 @@
     "@babel/stage-0"
   ],
   "plugins": [
-    "react-hot-loader/babel",
-    "transform-decorators-legacy"
+    "@babel/plugin-transform-react-jsx-source",
+    "react-hot-loader/babel"
   ]
 }
