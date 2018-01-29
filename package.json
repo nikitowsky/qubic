@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "webpack-dev-server --hot --config config/webpack.config.dev.js",
-    "build": "yarn clean && cross-env NODE_ENV=production webpack -p --config config/webpack.config.prod.js",
+    "build": "yarn clean && webpack -p --config config/webpack.config.prod.js",
     "clean": "rimraf public/dist",
     "prod": "cross-env NODE_ENV=production node .",
     "test": "jest"
