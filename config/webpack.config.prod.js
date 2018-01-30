@@ -1,3 +1,5 @@
+const { join } = require('path');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const HappyPack = require('happypack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -7,6 +9,16 @@ const baseConfig = require('./webpack.config.base');
 
 const prodConfig = {
   devtool: 'source-map',
+
+  entry: {
+    vendor: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      'redux',
+      'react-redux',
+    ],
+  },
 
   output: {
     filename: '[name].[hash].js',
@@ -44,7 +56,6 @@ const prodConfig = {
     new HappyPack({
       loaders: ['babel-loader'],
     }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
     new ExtractTextPlugin('style.[hash].css'),
     new CompressionPlugin({
       test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
@@ -52,6 +63,13 @@ const prodConfig = {
       asset: '[path].gz[query]',
       minRatio: 0.8,
       threshold: 10240,
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+    }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
     }),
   ],
 };
