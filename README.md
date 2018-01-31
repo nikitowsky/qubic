@@ -16,4 +16,4 @@ React starter project with pre-configured development and production-ready build
 * Seperated Webpack configs
 * Sass (SCSS) with [CSS Modules](https://github.com/css-modules/css-modules)
 * Pre-configured styles with [Bootstrap](https://getbootstrap.com/) grid system and [normalize.css](https://necolas.github.io/normalize.css/)
-* Production-ready Webpack configuration with vendor splitting, gzip compression, JS/CSS minification and [bundle analysis](https://www.npmjs.com/package/webpack-bundle-analyzer)
+* Production-ready Webpack configuration with vendor splitting, gzip compression, JS/CSS minification and [bundle analysis](https://github.com/webpack-contrib/webpack-bundle-analyzer)
