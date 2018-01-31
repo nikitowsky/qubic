@@ -4,17 +4,17 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --config config/webpack.config.dev.js",
     "build": "yarn clean && webpack -p --config config/webpack.config.prod.js",
     "clean": "rimraf public/dist",
-    "prod": "cross-env NODE_ENV=production node .",
+    "dev": "webpack-dev-server --hot --config config/webpack.config.dev.js",
+    "start": "cross-env NODE_ENV=production node .",
     "test": "jest"
   },
   "author": "Nikita Borisowsky",
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "^7.2.5",
-    "bootstrap": "4.0.0-beta.2",
+    "bootstrap": "^4.0.0",
     "cross-env": "^5.1.3",
     "express": "^4.16.2",
     "express-static-gzip": "^0.3.2",
