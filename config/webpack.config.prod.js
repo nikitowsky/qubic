@@ -1,4 +1,3 @@
-const { join } = require('path');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const HappyPack = require('happypack');
 const CompressionPlugin = require('compression-webpack-plugin');
