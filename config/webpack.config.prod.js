@@ -10,13 +10,7 @@ const prodConfig = {
   devtool: 'source-map',
 
   entry: {
-    vendor: [
-      'react',
-      'react-dom',
-      'react-router-dom',
-      'redux',
-      'react-redux',
-    ],
+    vendor: ['react', 'react-dom', 'react-router-dom', 'redux', 'react-redux'],
   },
 
   output: {

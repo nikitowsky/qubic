@@ -1,36 +1,15 @@
 {
   "parser": "babel-eslint",
   "rules": {
-    // Global
+    "arrow-parens": [2, "always", { "requireForBlockBody": true }],
     "func-names": 0,
-    "max-len": [2, 120],
-
-    // React
+    "max-len": [1, 120],
+    "object-curly-newline": 0,
     "react/prefer-stateless-function": 0,
-    "react/prop-types": 0,
-
-    // Ally
-    "jsx-a11y/click-events-have-key-events": 0,
-    "jsx-a11y/no-noninteractive-element-interactions": 0,
-    "jsx-a11y/no-static-element-interactions": 0,
-    "jsx-a11y/label-has-for": [2, {
-      "components": ["Label"],
-      "required": {
-        "every": ["id"]
-      },
-      "allowChildren": false
-    }]
+    "react/prop-types": 0
   },
-  "extends": [
-    "airbnb",
-    "plugin:jest/recommended"
-  ],
-  "plugins": [
-    "import",
-    "jest",
-    "jsx-a11y",
-    "react"
-  ],
+  "extends": ["airbnb", "plugin:jest/recommended"],
+  "plugins": ["import", "jest", "react"],
   "env": {
     "browser": true,
     "jest/globals": true
