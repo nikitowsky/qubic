@@ -9,7 +9,7 @@
     "react/prop-types": 0
   },
   "extends": ["airbnb", "plugin:jest/recommended"],
-  "plugins": ["import", "jest", "react"],
+  "plugins": ["import", "jest", "jsx-a11y", "react"],
   "env": {
     "browser": true,
     "jest/globals": true

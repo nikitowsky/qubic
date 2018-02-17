@@ -1,16 +1,4 @@
 {
-  "presets": [
-    [
-      "@babel/env",
-      {
-        "modules": false
-      }
-    ],
-    "@babel/react",
-    "@babel/stage-0"
-  ],
-  "plugins": [
-    "@babel/plugin-transform-react-jsx-source",
-    "react-hot-loader/babel"
-  ]
+  "presets": ["@babel/env", "@babel/react", "@babel/stage-0"],
+  "plugins": ["@babel/plugin-transform-react-jsx-source", "react-hot-loader/babel"]
 }
