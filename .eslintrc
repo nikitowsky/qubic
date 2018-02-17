@@ -3,6 +3,7 @@
   "rules": {
     "arrow-parens": [2, "always", { "requireForBlockBody": true }],
     "func-names": 0,
+    "max-len": [1, 120],
     "object-curly-newline": 0,
     "react/prefer-stateless-function": 0,
     "react/prop-types": 0

@@ -61,5 +61,9 @@
     "prettier": "^1.10.2",
     "webpack-dev-server": "^2.11.1"
   },
-  "browserslist": ["> 1%", "IE >= 8", "Safari >= 7"]
+  "browserslist": [
+    "> 1%",
+    "IE >= 8",
+    "Safari >= 7"
+  ]
 }
