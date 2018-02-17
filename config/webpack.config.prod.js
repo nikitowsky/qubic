@@ -1,6 +1,5 @@
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const HappyPack = require('happypack');
-const CompressionPlugin = require('compression-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -50,13 +49,6 @@ const prodConfig = {
       loaders: ['babel-loader'],
     }),
     new ExtractTextPlugin('style.[hash].css'),
-    new CompressionPlugin({
-      test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
-      algorithm: 'gzip',
-      asset: '[path].gz[query]',
-      minRatio: 0.8,
-      threshold: 10240,
-    }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
     }),

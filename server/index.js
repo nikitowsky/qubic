@@ -1,14 +1,15 @@
 const { resolve } = require('path');
 const express = require('express');
-const expressStaticGzip = require('express-static-gzip');
+const helmet = require('helmet');
+const compression = require('compression');
 
 const app = express();
 const port = process.env.PORT || 8000;
 
+app.use(helmet());
+app.use(compression());
 app.use(express.static('public'));
 app.use(express.static('public/dist'));
-app.use(expressStaticGzip('public'));
-app.use(expressStaticGzip('client'));
 
 app.get('/*', (req, res) => {
   res.sendFile(resolve(__dirname, '../public/dist/index.html'));
