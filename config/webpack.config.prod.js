@@ -8,10 +8,6 @@ const baseConfig = require('./webpack.config.base');
 const prodConfig = {
   devtool: 'source-map',
 
-  entry: {
-    vendor: ['react', 'react-dom', 'react-router-dom', 'redux', 'react-redux'],
-  },
-
   output: {
     filename: '[name].[hash].js',
   },
@@ -44,6 +40,12 @@ const prodConfig = {
     ],
   },
 
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
+
   plugins: [
     new HappyPack({
       loaders: ['babel-loader'],
@@ -51,10 +53,6 @@ const prodConfig = {
     new ExtractTextPlugin('style.[hash].css'),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
-    }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
     }),
   ],
 };
