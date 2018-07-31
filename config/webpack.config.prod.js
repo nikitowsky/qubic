@@ -1,11 +1,13 @@
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HappyPack = require('happypack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const webpack = require('webpack');
 const merge = require('webpack-merge');
+
 const baseConfig = require('./webpack.config.base');
+const { regexp, buildStyleLoader } = require('./utils');
 
 const prodConfig = {
+  mode: 'production',
+
   devtool: 'source-map',
 
   output: {
@@ -15,26 +17,20 @@ const prodConfig = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: regexp.typescript,
         exclude: /node_modules/,
         use: 'happypack/loader',
       },
       {
-        test: /\.s?css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              query: {
-                modules: true,
-                localIdentName: '[name]__[local]___[hash:base64:5]',
-              },
-            },
-            'csso-loader',
-            'postcss-loader',
-            'sass-loader',
-          ],
+        test: regexp.css,
+        exclude: regexp.cssModules,
+        use: buildStyleLoader({ extractFile: true }),
+      },
+      {
+        test: regexp.cssModules,
+        use: buildStyleLoader({
+          cssModules: true,
+          extractFile: true,
         }),
       },
     ],
@@ -50,9 +46,8 @@ const prodConfig = {
     new HappyPack({
       loaders: ['babel-loader'],
     }),
-    new ExtractTextPlugin('style.[hash].css'),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
+    new MiniCssExtractPlugin({
+      filename: 'style.[hash].css',
     }),
   ],
 };
