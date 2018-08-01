@@ -1,9 +1,15 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HappyPack = require('happypack');
+const Dotenv = require('dotenv-webpack');
 const merge = require('webpack-merge');
 
 const baseConfig = require('./webpack.config.base');
-const { regexp, buildStyleLoader } = require('./utils');
+const { regexp, buildDotenvPath, buildStyleLoader } = require('./utils');
+
+// Forces CLIENT_ENV to be present in production builds
+const CLIENT_ENV = process.env.CLIENT_ENV || 'production';
+
+console.log(CLIENT_ENV);
 
 const prodConfig = {
   mode: 'production',
@@ -44,10 +50,26 @@ const prodConfig = {
 
   plugins: [
     new HappyPack({
-      loaders: ['babel-loader'],
+      loaders: [
+        {
+          loader: 'babel-loader',
+          options: {
+            plugins: [
+              '@babel/plugin-syntax-typescript',
+              '@babel/plugin-syntax-decorators',
+              '@babel/plugin-syntax-jsx',
+              'react-hot-loader/babel',
+            ],
+          },
+        },
+      ],
     }),
     new MiniCssExtractPlugin({
       filename: 'style.[hash].css',
+    }),
+    new Dotenv({
+      path: buildDotenvPath(CLIENT_ENV),
+      silent: true,
     }),
   ],
 };

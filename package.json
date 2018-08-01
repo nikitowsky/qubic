@@ -1,11 +1,11 @@
 {
   "name": "react-rich-starter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "React TypeScript starter",
   "scripts": {
     "start": "yarn dev",
     "dev": "webpack-dev-server --hot --config config/webpack.config.dev.js",
-    "build": "yarn clean && webpack --config config/webpack.config.prod.js",
+    "build": "webpack --config config/webpack.config.prod.js",
     "clean": "rimraf dist"
   },
   "author": "Nikita Borisowsky",
@@ -24,6 +24,7 @@
     "babel-loader": "^8.0.0-beta.4",
     "css-loader": "^1.0.0",
     "csso-loader": "^0.3.1",
+    "dotenv-webpack": "^1.5.7",
     "file-loader": "^1.1.11",
     "happypack": "^5.0.0",
     "html-webpack-plugin": "^3.2.0",

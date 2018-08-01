@@ -1,11 +1,14 @@
 # Unnecessary foders
 /node_modules
-/public/dist
+/dist
 
 # IDE's
 /.atom
 /.idea
 /.vscode
+
+# Secure
+.env
 
 # Other files
 *.log
