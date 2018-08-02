@@ -6,8 +6,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
  * Important files paths
  */
 const paths = {
-  envProduction: path.join(__dirname, '../.env.production'),
-  envDevelopment: path.join(__dirname, '../.env.development'),
   source: path.join(__dirname, '../src/index.tsx'),
   template: path.join(__dirname, '../src/index.html'),
   outputDir: path.join(__dirname, '../dist'),
