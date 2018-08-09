@@ -1,21 +1,22 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const { paths, regexp, buildStyleLoader } = require('./utils');
+const { constants, buildStyleLoader, buildWebpackAliases } = require('./utils');
 
 const baseConfig = {
   entry: {
-    bundle: ['@babel/polyfill', paths.source],
+    bundle: ['@babel/polyfill', constants.paths.source],
   },
 
   output: {
-    path: paths.outputDir,
+    path: constants.paths.outputDir,
     filename: '[name].js',
   },
 
   module: {
     rules: [
       {
-        test: regexp.typescript,
+        test: constants.regexp.typescript,
         exclude: /node_modules/,
         use: [
           {
@@ -38,16 +39,16 @@ const baseConfig = {
         ],
       },
       {
-        test: regexp.css,
-        exclude: regexp.cssModules,
+        test: constants.regexp.css,
+        exclude: constants.regexp.cssModules,
         use: buildStyleLoader(),
       },
       {
-        test: regexp.cssModules,
+        test: constants.regexp.cssModules,
         use: buildStyleLoader({ cssModules: true }),
       },
       {
-        test: regexp.files,
+        test: constants.regexp.files,
         loader: 'file-loader',
         options: {
           name: '[sha512:hash:base64:7].[ext]',
@@ -58,12 +59,13 @@ const baseConfig = {
 
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: buildWebpackAliases(),
   },
 
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: paths.template,
+      template: constants.paths.template,
     }),
   ],
 };

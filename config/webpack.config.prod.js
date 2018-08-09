@@ -4,12 +4,10 @@ const Dotenv = require('dotenv-webpack');
 const merge = require('webpack-merge');
 
 const baseConfig = require('./webpack.config.base');
-const { regexp, buildDotenvPath, buildStyleLoader } = require('./utils');
+const { constants, buildDotenvPath, buildStyleLoader } = require('./utils');
 
 // Forces CLIENT_ENV to be present in production builds
 const CLIENT_ENV = process.env.CLIENT_ENV || 'production';
-
-console.log(CLIENT_ENV);
 
 const prodConfig = {
   mode: 'production',
@@ -23,17 +21,17 @@ const prodConfig = {
   module: {
     rules: [
       {
-        test: regexp.typescript,
+        test: constants.regexp.typescript,
         exclude: /node_modules/,
         use: 'happypack/loader',
       },
       {
-        test: regexp.css,
-        exclude: regexp.cssModules,
+        test: constants.regexp.css,
+        exclude: constants.regexp.cssModules,
         use: buildStyleLoader({ extractFile: true }),
       },
       {
-        test: regexp.cssModules,
+        test: constants.regexp.cssModules,
         use: buildStyleLoader({
           cssModules: true,
           extractFile: true,
@@ -70,6 +68,7 @@ const prodConfig = {
     new Dotenv({
       path: buildDotenvPath(CLIENT_ENV),
       silent: true,
+      systemvars: true,
     }),
   ],
 };

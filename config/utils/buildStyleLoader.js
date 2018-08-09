@@ -1,32 +1,5 @@
-const path = require('path');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-/**
- * Important files paths
- */
-const paths = {
-  source: path.join(__dirname, '../src/index.tsx'),
-  template: path.join(__dirname, '../src/index.html'),
-  outputDir: path.join(__dirname, '../dist'),
-};
-
-/**
- * Regular expressions for Webpack
- */
-const regexp = {
-  typescript: /\.(ts|tsx)$/,
-  css: /\.(css|scss|sass)$/,
-  cssModules: /\.module\.(css|scss|sass)$/,
-  files: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf)$/,
-};
-
-/**
- * Returns path to .env file
- *
- * @param {string} env environment (ex. `production`, `stage`, `development`)
- */
-const buildDotenvPath = (env = 'development') => path.join(__dirname, `../.env.${env}`);
 
 /**
  * Returns list of loaders for specific situation
@@ -67,9 +40,4 @@ const buildStyleLoader = (options = {}) => {
   return loaders;
 };
 
-module.exports = {
-  paths,
-  regexp,
-  buildDotenvPath,
-  buildStyleLoader,
-};
+module.exports = buildStyleLoader;

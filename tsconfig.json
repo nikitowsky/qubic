@@ -9,6 +9,5 @@
     "noUnusedParameters": true,
     "noImplicitAny": false,
     "strictNullChecks": true
-  },
-  "include": ["src/**/*"]
+  }
 }
