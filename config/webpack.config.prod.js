@@ -52,12 +52,7 @@ const prodConfig = {
         {
           loader: 'babel-loader',
           options: {
-            plugins: [
-              '@babel/plugin-syntax-typescript',
-              '@babel/plugin-syntax-decorators',
-              '@babel/plugin-syntax-jsx',
-              'react-hot-loader/babel',
-            ],
+            presets: ['@babel/react', '@babel/typescript'],
           },
         },
       ],

@@ -20,20 +20,16 @@ const baseConfig = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'awesome-typescript-loader',
+            loader: 'babel-loader',
             options: {
-              silent: true,
+              plugins: ['react-hot-loader/babel'],
+              presets: ['@babel/react', '@babel/typescript'],
             },
           },
           {
-            loader: 'babel-loader',
+            loader: 'awesome-typescript-loader',
             options: {
-              plugins: [
-                '@babel/plugin-syntax-typescript',
-                '@babel/plugin-syntax-decorators',
-                '@babel/plugin-syntax-jsx',
-                'react-hot-loader/babel',
-              ],
+              silent: true,
             },
           },
         ],
