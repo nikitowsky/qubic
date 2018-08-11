@@ -14,8 +14,24 @@ const prepareURLs = (port) => {
     local,
   };
 
-  // Get Wi-fi network address, so you can visit server by your IP address
-  const networkAddress = idx(os.networkInterfaces(), (networks) => networks.en0[1].address);
+  // Wi-fi network address, so you can visit server by your IP address
+  let networkAddress;
+
+  switch (process.platform) {
+    case 'darwin': {
+      networkAddress = idx(os.networkInterfaces(), (networks) => networks.en0[1].address);
+      break;
+    }
+
+    case 'win32': {
+      networkAddress = idx(os.networkInterfaces(), (networks) => networks.Ethernet[1].address);
+      break;
+    }
+
+    default: {
+      throw new Error('Cannot find public network.');
+    }
+  }
 
   if (networkAddress !== undefined && networkAddress !== null) {
     networkUrl = encodeURI(`http://${networkAddress}:${port}`);
