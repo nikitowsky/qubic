@@ -1,6 +1,7 @@
 {
   "name": "qubic-app",
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
     "start": "yarn dev",
     "dev": "qubic dev",
@@ -8,7 +9,7 @@
     "clean": "qubic clean"
   },
   "dependencies": {
-    "@qubic/builder": "2.0.0-beta.0",
+    "@qubic/builder": "2.0.0-beta.2",
     "@types/react": "^16.4.9",
     "@types/react-dom": "^16.0.7",
     "@types/react-hot-loader": "^4.1.0",
