@@ -1,0 +1,14 @@
+# Unnecessary foders
+/node_modules
+/packages/**/node_modules
+/packages/**/dist
+/packages/template
+
+# IDE's
+/.atom
+/.idea
+/.vscode
+
+# Other files
+*.log
+.DS_Store

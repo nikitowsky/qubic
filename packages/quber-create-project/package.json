@@ -1,0 +1,26 @@
+{
+  "name": "@quber/create-project",
+  "version": "2.0.0-beta.0",
+  "description": "Just an CLI to create base project",
+  "author": "borisowsky <yuzirock@gmail.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/quber-create-project.js",
+  "bin": {
+    "create-project": "./lib/quber-create-project.js"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "template",
+    "lib"
+  ],
+  "dependencies": {
+    "execa": "0.10.0",
+    "fs-extra": "7.0.0",
+    "inquirer": "6.1.0",
+    "listr": "0.14.1",
+    "validate-npm-package-name": "3.0.0"
+  }
+}
