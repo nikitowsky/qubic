@@ -1,5 +1,5 @@
 {
-  "name": "cuber",
+  "name": "qubic",
   "private": true,
   "workspaces": [
     "packages/*"

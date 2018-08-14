@@ -1,13 +1,13 @@
 {
-  "name": "@quber/create-project",
+  "name": "@qubic/create-project",
   "version": "2.0.0-beta.0",
   "description": "Just an CLI to create base project",
   "author": "borisowsky <yuzirock@gmail.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "lib/quber-create-project.js",
+  "main": "lib/qubic-create-project.js",
   "bin": {
-    "create-project": "./lib/quber-create-project.js"
+    "create-project": "./lib/qubic-create-project.js"
   },
   "directories": {
     "lib": "lib"

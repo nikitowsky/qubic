@@ -1,14 +1,14 @@
 {
-  "name": "quber-app",
+  "name": "qubic-app",
   "version": "0.0.0",
   "scripts": {
     "start": "yarn dev",
-    "dev": "quber dev",
-    "build": "quber build",
-    "clean": "quber clean"
+    "dev": "qubic dev",
+    "build": "qubic build",
+    "clean": "qubic clean"
   },
   "dependencies": {
-    "@quber/builder": "^1.0.0",
+    "@qubic/builder": "^1.0.0",
     "@types/react": "^16.4.9",
     "@types/react-dom": "^16.0.7",
     "@types/react-hot-loader": "^4.1.0",

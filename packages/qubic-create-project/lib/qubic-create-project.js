@@ -15,7 +15,7 @@ inquirer
     {
       name: 'name',
       message: 'Project name?',
-      default: 'quber-app',
+      default: 'qubic-app',
       filter: (input) => toKebabCase(input),
       validate: (input) => {
         const validation = validate(input);

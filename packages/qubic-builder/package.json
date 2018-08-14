@@ -1,12 +1,12 @@
 {
-  "name": "@quber/builder",
+  "name": "@qubic/builder",
   "version": "2.0.0-beta.0",
   "description": "Webpack based builder",
   "author": "borisowsky <yuzirock@gmail.com>",
   "homepage": "",
   "license": "ISC",
   "bin": {
-    "quber": "./lib/quber-builder.js"
+    "qubic": "./lib/qubic-builder.js"
   },
   "directories": {
     "lib": "lib"
