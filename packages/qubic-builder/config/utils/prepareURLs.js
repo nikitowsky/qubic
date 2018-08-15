@@ -29,7 +29,7 @@ const prepareURLs = (port) => {
     }
 
     default: {
-      throw new Error('Cannot find public network.');
+      networkAddress = null;
     }
   }
 
