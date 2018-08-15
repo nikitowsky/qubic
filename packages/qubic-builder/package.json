@@ -1,6 +1,6 @@
 {
   "name": "@qubic/builder",
-  "version": "2.0.0-beta.3",
+  "version": "2.0.0-beta.4",
   "description": "Webpack based builder",
   "author": "borisowsky <yuzirock@gmail.com>",
   "homepage": "",
@@ -43,5 +43,14 @@
     "webpack-cli": "3.1.0",
     "webpack-dev-server": "^3.1.5",
     "webpack-merge": "4.1.4"
+  },
+  "peerDependencies": {
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "@types/react-hot-loader": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-hot-loader": "^4.3.4",
+    "typescript": "^3.0.1"
   }
 }

@@ -23,7 +23,7 @@ const openTab = (url) => {
         stdio: 'ignore',
       });
     } catch (e) {
-      // Do nothing with errros
+      throw new Error('Cannot find browser to open, do it manually.');
     }
   } else {
     switch (process.platform) {

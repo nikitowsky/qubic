@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+console.log('Huh');
+
 const program = require('commander');
 
 const dev = require('./commands/dev');

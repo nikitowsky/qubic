@@ -69,7 +69,11 @@ const startServer = (options) => {
       console.log(error);
     }
 
-    openTab(local);
+    try {
+      openTab(local);
+    } catch (e) {
+      console.log('[warning]', e.message, '\n');
+    }
 
     console.log('You can visit your development server:\n');
     console.log('Local:', local);
