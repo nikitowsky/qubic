@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-const path = require('path');
+const chalk = require('chalk');
 const inquirer = require('inquirer');
+const path = require('path');
 const validate = require('validate-npm-package-name');
-const Listr = require('listr');
 
-const { copyTemplate, createFolder, installDependencies, toKebabCase } = require('./utils');
+const { copyTemplate, createFolder, installDependencies, logger, toKebabCase } = require('./utils');
 
 /** Script execution folder (project folder) */
 const contextDir = process.cwd();
@@ -28,25 +28,45 @@ inquirer
       },
     },
   ])
-  .then(({ name }) => {
+  .then(async ({ name }) => {
     const projectFolder = path.join(contextDir, name);
-    const tasks = new Listr([
-      {
-        title: 'Create folder',
-        task: async () => await createFolder(contextDir, name),
-      },
-      {
-        title: 'Prepare project layout',
-        task: async () => await copyTemplate(contextDir, name),
-      },
-      {
-        title: 'Install dependencies',
-        task: async () => await installDependencies(projectFolder),
-      },
-    ]);
 
-    tasks.run().catch((e) => {
-      console.log('Installation failed, reason:\n');
-      console.log(e.message);
-    });
+    logger.info(`Create folder ${chalk.yellow(projectFolder)}...`);
+
+    // Create project folder
+    await createFolder(contextDir, name);
+
+    logger.info('Copy template...');
+
+    // Copy project template
+    await copyTemplate(contextDir, name);
+
+    logger.info(`Install dependencies:`);
+    console.log(chalk.yellow(' - @qubic/builder'));
+    console.log(chalk.yellow(' - react'));
+    console.log(chalk.yellow(' - react-dom'));
+    console.log(chalk.yellow(' - react-hot-loader'));
+    console.log(chalk.yellow(' - typescript'));
+    console.log('');
+
+    // Install dependencies
+    const installation = installDependencies(projectFolder);
+
+    try {
+      installation.stdout.pipe(process.stdout);
+    } catch (e) {
+      // Do nothing on errors
+    }
+
+    console.log();
+    logger.info('Now you can start by following these commands:');
+    console.log('');
+    console.log(`   ${chalk.white(`cd ${name}`)}`);
+    console.log('');
+    console.log(`   ${chalk.white('yarn start')} - start development server`);
+    console.log(`   ${chalk.white('yarn build')} - build project`);
+    console.log(`   ${chalk.white('yarn clean')} - clean ${chalk.yellow('dist')} folder`);
+  })
+  .catch((e) => {
+    logger.error('Cannot init project, reason:', e.message);
   });

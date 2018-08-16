@@ -3,8 +3,8 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const Dotenv = require('dotenv-webpack');
 
-const devConfig = require('../../config/webpack.config.dev');
-const { prepareURLs, openTab, buildDotenvPath } = require('../../config/utils');
+const devConfig = require('../config/webpack.config.dev');
+const { prepareURLs, openTab, buildDotenvPath } = require('../config/utils');
 
 /**
  * Prepare development server config

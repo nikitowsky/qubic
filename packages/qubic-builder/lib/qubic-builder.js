@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-console.log('Huh');
-
 const program = require('commander');
 
 const dev = require('./commands/dev');
@@ -23,6 +21,10 @@ program.on('command:dev', () => {
 
 program.on('command:build', () => {
   const { env = 'production' } = program;
+
+  // Should be set to 'production' for Webpack
+  process.env.BABEL_ENV = 'production';
+  process.env.NODE_ENV = 'production';
 
   build.startBuild({ env });
 });

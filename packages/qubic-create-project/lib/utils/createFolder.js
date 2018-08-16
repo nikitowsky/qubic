@@ -1,5 +1,6 @@
-const path = require('path');
+const chalk = require('chalk');
 const fs = require('fs-extra');
+const path = require('path');
 
 /**
  * TODO: Describe function
@@ -15,7 +16,7 @@ const createFolder = (directory, projectName) => {
     return fs.mkdir(directoryPath);
   }
 
-  throw new Error(`Cannot create folder ${projectName}, it's already exists!`);
+  throw new Error(`Folder ${chalk.white(projectName)} already exists!`);
 };
 
 module.exports = createFolder;

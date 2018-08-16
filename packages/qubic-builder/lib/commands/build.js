@@ -3,8 +3,8 @@ const merge = require('webpack-merge');
 const Dotenv = require('dotenv-webpack');
 const ora = require('ora');
 
-const prodConfig = require('../../config/webpack.config.prod');
-const { buildDotenvPath } = require('../../config/utils');
+const prodConfig = require('../config/webpack.config.prod');
+const { buildDotenvPath } = require('../config/utils');
 
 /**
  * Prepare production config

@@ -1,4 +1,24 @@
-const execa = require('execa');
+const { spawn, spawnSync } = require('child_process');
+const semver = require('semver');
+
+/**
+ * Decide what package manager to use
+ */
+const getPackageManager = () => {
+  let packageManager;
+
+  try {
+    const { stdout } = spawnSync('yarn', ['-v']);
+
+    if (semver.valid(stdout) && semver.major(stdout) >= 1) {
+      packageManager = 'yarn';
+    }
+  } catch (e) {
+    packageManager = 'npm';
+  }
+
+  return packageManager;
+};
 
 /**
  * Install packages
@@ -6,9 +26,34 @@ const execa = require('execa');
  * @param {string} directory
  */
 const installDependencies = (directory) => {
-  return execa(`yarn`, {
-    cwd: directory,
-  });
+  const packageManager = getPackageManager();
+
+  const packagesToInstall = [
+    '@qubic/builder@2.0.0-beta.4',
+    'react',
+    'react-dom',
+    'react-hot-loader',
+    '@types/react',
+    '@types/react-dom',
+    '@types/react-hot-loader',
+    'typescript',
+  ];
+
+  const packages = packagesToInstall.join(' ');
+
+  const commands = {
+    yarn: ['yarn', ['add', packages]],
+    npm: ['npm', ['install', '--save', packages]],
+  };
+
+  try {
+    return spawnSync(...commands['yarn'], {
+      cwd: directory,
+      stdio: 'inherit',
+    });
+  } catch (e) {
+    // Do nothing on errors
+  }
 };
 
 module.exports = installDependencies;

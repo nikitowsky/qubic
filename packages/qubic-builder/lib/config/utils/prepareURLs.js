@@ -1,5 +1,10 @@
+const address = require('address');
 const idx = require('idx');
 const os = require('os');
+
+const validateNetworkAddress = (address) => {
+  return /^10[.]|^172[.](1[6-9]|2[0-9]|3[0-1])[.]|^192[.]168[.]/.test(address);
+};
 
 /**
  * Return active development server URLs
@@ -15,25 +20,9 @@ const prepareURLs = (port) => {
   };
 
   // Wi-fi network address, so you can visit server by your IP address
-  let networkAddress;
+  let networkAddress = address.ip();
 
-  switch (process.platform) {
-    case 'darwin': {
-      networkAddress = idx(os.networkInterfaces(), (networks) => networks.en0[1].address);
-      break;
-    }
-
-    case 'win32': {
-      networkAddress = idx(os.networkInterfaces(), (networks) => networks.Ethernet[1].address);
-      break;
-    }
-
-    default: {
-      networkAddress = null;
-    }
-  }
-
-  if (networkAddress !== undefined && networkAddress !== null) {
+  if (networkAddress && validateNetworkAddress(networkAddress)) {
     networkUrl = encodeURI(`http://${networkAddress}:${port}`);
     urls.network = networkUrl;
   }
