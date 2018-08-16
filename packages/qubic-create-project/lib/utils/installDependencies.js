@@ -29,7 +29,7 @@ const installDependencies = (directory) => {
   const packageManager = getPackageManager();
 
   const packagesToInstall = [
-    '@qubic/builder@2.0.0-beta.4',
+    '@qubic/builder@2.0.0-beta.5',
     'react',
     'react-dom',
     'react-hot-loader',

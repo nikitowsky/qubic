@@ -9,7 +9,7 @@
     "clean": "qubic clean"
   },
   "dependencies": {
-    "@qubic/builder": "^2.0.0-beta.4",
+    "@qubic/builder": "^2.0.0-beta.5",
     "@types/react": "^16.4.9",
     "@types/react-dom": "^16.0.7",
     "@types/react-hot-loader": "^4.1.0",
