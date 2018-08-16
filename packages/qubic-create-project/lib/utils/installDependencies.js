@@ -29,7 +29,7 @@ const installDependencies = (directory) => {
   const packageManager = getPackageManager();
 
   const packagesToInstall = [
-    '@qubic/builder@2.0.0-beta.6',
+    '@qubic/builder@2.0.0-beta.7',
     'react',
     'react-dom',
     'react-hot-loader',
@@ -39,11 +39,9 @@ const installDependencies = (directory) => {
     'typescript',
   ];
 
-  const packages = packagesToInstall.join(' ');
-
   const commands = {
-    yarn: ['yarn', ['add', packages]],
-    npm: ['npm', ['install', '--save', packages]],
+    yarn: ['yarn', ['add', ...packagesToInstall]],
+    npm: ['npm', ['install', '--save', ...packagesToInstall]],
   };
 
   try {
