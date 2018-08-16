@@ -1,3 +1,4 @@
+const { logger } = require('@qubic/dev-utils');
 const rimraf = require('rimraf');
 const ora = require('ora');
 
@@ -8,6 +9,7 @@ const startClean = () => {
 
   rimraf(constants.paths.outputDir, () => {
     spinner.stop();
+    logger.info('Successfully cleaned');
   });
 };
 

@@ -1,0 +1,19 @@
+{
+  "name": "@qubic/dev-utils",
+  "version": "2.0.0-beta.4",
+  "description": "Qubic development utils",
+  "author": "borisowsky <yuzirock@gmail.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/qubic-dev-utils.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "config",
+    "lib"
+  ],
+  "dependencies": {
+    "chalk": "2.4.1"
+  }
+}

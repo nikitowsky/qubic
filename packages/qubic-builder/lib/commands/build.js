@@ -1,3 +1,4 @@
+const { logger } = require('@qubic/dev-utils');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const Dotenv = require('dotenv-webpack');
@@ -40,7 +41,8 @@ const startBuild = (options) => {
   webpack(config, (error, stats) => {
     if (error || stats.hasErrors()) {
       // Handle errors here
-      console.log('Error...');
+      logger.error('Compilation failed, reason:\n');
+      console.log(error);
     }
 
     // Done processing

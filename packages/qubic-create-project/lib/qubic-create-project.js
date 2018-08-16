@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
+const { logger } = require('@qubic/dev-utils');
 const chalk = require('chalk');
 const inquirer = require('inquirer');
 const path = require('path');
 const validate = require('validate-npm-package-name');
 
-const { copyTemplate, createFolder, installDependencies, logger, toKebabCase } = require('./utils');
+const { copyTemplate, createFolder, installDependencies, toKebabCase } = require('./utils');
 
 /** Script execution folder (project folder) */
 const contextDir = process.cwd();

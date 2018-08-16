@@ -1,10 +1,16 @@
+const { logger } = require('@qubic/dev-utils');
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const Dotenv = require('dotenv-webpack');
+const chalk = require('chalk');
 
 const devConfig = require('../config/webpack.config.dev');
 const { prepareURLs, openTab, buildDotenvPath } = require('../config/utils');
+
+const decorateLink = (link) => {
+  return chalk.cyan.underline(link);
+};
 
 /**
  * Prepare development server config
@@ -66,18 +72,18 @@ const startServer = (options) => {
 
   devServer.listen(webpackDevServerOptions.port, webpackDevServerOptions.host, (error) => {
     if (error) {
-      console.log(error);
+      logger.error(error);
     }
 
     try {
       openTab(local);
     } catch (e) {
-      console.log('[warning]', e.message, '\n');
+      logger.warning(e.message, '\n');
     }
 
-    console.log('You can visit your development server:\n');
-    console.log('Local:', local);
-    network && console.log('Network:', network);
+    logger.info('You can visit your development server:\n');
+    console.log('   Local:', decorateLink(local));
+    network && console.log('   Network:', decorateLink(network));
 
     ['SIGINT', 'SIGTERM'].forEach((signal) => {
       process.on(signal, () => {
