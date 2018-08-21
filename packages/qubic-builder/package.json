@@ -1,6 +1,6 @@
 {
   "name": "@qubic/builder",
-  "version": "2.0.0-beta.7",
+  "version": "2.0.0-beta.8",
   "description": "Webpack based builder",
   "author": "borisowsky <yuzirock@gmail.com>",
   "homepage": "",
@@ -20,7 +20,7 @@
     "@babel/polyfill": "7.0.0-rc.1",
     "@babel/preset-react": "7.0.0-rc.1",
     "@babel/preset-typescript": "7.0.0-rc.1",
-    "@qubic/dev-utils": "2.0.0-beta.7",
+    "@qubic/dev-utils": "2.0.0-beta.8",
     "address": "^1.0.3",
     "autoprefixer": "9.1.0",
     "awesome-typescript-loader": "5.2.0",

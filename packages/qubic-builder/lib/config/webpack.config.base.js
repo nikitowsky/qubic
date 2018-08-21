@@ -11,6 +11,7 @@ const baseConfig = {
   output: {
     path: constants.paths.outputDir,
     filename: '[name].js',
+    publicPath: '/',
   },
 
   module: {

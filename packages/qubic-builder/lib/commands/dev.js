@@ -84,6 +84,7 @@ const startServer = (options) => {
     logger.info('You can visit your development server:\n');
     console.log('   Local:', decorateLink(local));
     network && console.log('   Network:', decorateLink(network));
+    console.log('');
 
     ['SIGINT', 'SIGTERM'].forEach((signal) => {
       process.on(signal, () => {
