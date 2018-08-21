@@ -35,22 +35,34 @@ const prepareProdConfig = (options) => {
  */
 const startBuild = (options) => {
   const config = prepareProdConfig({ env: options.env });
+  const spinner = ora(`Building ${options.env}...\n`).start();
+  const compiler = webpack(config);
 
-  const spinner = ora(`Building ${options.env}...`).start();
+  // No deprecation errors unless built-in webpack.ProgressPlguin dosen't use hooks api
+  process.noDeprecation = true;
 
-  webpack(config, (error, stats) => {
+  compiler.apply(
+    new webpack.ProgressPlugin((precentage) => {
+      const computedPrecentage = (precentage * 100).toFixed(0);
+
+      spinner.text = `Building ${options.env} ${computedPrecentage}%...\n`;
+    }),
+  );
+
+  compiler.run((error, stats) => {
     if (error || stats.hasErrors()) {
       // Handle errors here
+      logger.br();
       logger.error('Compilation failed, reason:\n');
-      console.log(error);
+
+      spinner.stop();
+      return console.log(error || 'Unknown error :(');
     }
 
     // Done processing
     spinner.stop();
   });
 };
-
-// const config = prepareProdConfig();
 
 module.exports = {
   startBuild,

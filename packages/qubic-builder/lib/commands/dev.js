@@ -1,4 +1,4 @@
-const { logger } = require('@qubic/dev-utils');
+const { clearConsole, logger } = require('@qubic/dev-utils');
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -70,6 +70,8 @@ const startServer = (options) => {
   // Define Webpack Dev Server instance
   const devServer = new WebpackDevServer(compiler, webpackDevServerOptions);
 
+  const isInteractive = process.stdout.isTTY;
+
   devServer.listen(webpackDevServerOptions.port, webpackDevServerOptions.host, (error) => {
     if (error) {
       logger.error(error);
@@ -81,10 +83,14 @@ const startServer = (options) => {
       logger.warning(e.message, '\n');
     }
 
+    if (isInteractive) {
+      clearConsole();
+    }
+
     logger.info('You can visit your development server:\n');
-    console.log('   Local:', decorateLink(local));
+    local && console.log('   Local:  ', decorateLink(local));
     network && console.log('   Network:', decorateLink(network));
-    console.log('');
+    logger.br();
 
     ['SIGINT', 'SIGTERM'].forEach((signal) => {
       process.on(signal, () => {
