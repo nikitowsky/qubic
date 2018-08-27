@@ -17,6 +17,25 @@ const prodConfig = {
   module: {
     rules: [
       {
+        test: constants.regexp.typescript,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              presets: ['@babel/react', '@babel/typescript'],
+            },
+          },
+          {
+            loader: 'awesome-typescript-loader',
+            options: {
+              silent: true,
+            },
+          },
+        ],
+      },
+      {
         test: constants.regexp.css,
         exclude: constants.regexp.cssModules,
         use: buildStyleLoader({ extractFile: true }),
@@ -27,6 +46,13 @@ const prodConfig = {
           cssModules: true,
           extractFile: true,
         }),
+      },
+      {
+        test: constants.regexp.files,
+        loader: 'file-loader',
+        options: {
+          name: '[sha512:hash:base64:7].[ext]',
+        },
       },
     ],
   },
@@ -39,9 +65,10 @@ const prodConfig = {
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'style.[hash].css',
+      filename: '[name].[contenthash:8].css',
+      chunkFilename: '[name].[contenthash:8].chunk.css',
     }),
   ],
 };
 
-module.exports = merge.smart(baseConfig, prodConfig);
+module.exports = merge.smartStrategy({ 'module.rules': 'replace' })(baseConfig, prodConfig);
