@@ -16,10 +16,11 @@ const paths = {
  * Regular expressions for Webpack
  */
 const regexp = {
-  typescript: /\.(ts|tsx)$/,
   css: /\.(css|scss|sass)$/,
   cssModules: /\.module\.(css|scss|sass)$/,
   files: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf)$/,
+  graphql: /\.(graphql|gql)$/,
+  typescript: /\.(ts|tsx)$/,
 };
 
 module.exports = {

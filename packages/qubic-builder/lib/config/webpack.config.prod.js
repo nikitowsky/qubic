@@ -54,6 +54,11 @@ const prodConfig = {
           name: '[sha512:hash:base64:7].[ext]',
         },
       },
+      {
+        test: constants.regexp.graphql,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader',
+      },
     ],
   },
 

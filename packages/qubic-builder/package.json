@@ -31,6 +31,7 @@
     "csso-loader": "0.3.1",
     "dotenv-webpack": "1.5.7",
     "file-loader": "1.1.11",
+    "graphql-tag": "2.9.2",
     "html-webpack-plugin": "3.2.0",
     "idx": "2.4.0",
     "mini-css-extract-plugin": "0.4.1",
