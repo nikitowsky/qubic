@@ -2,6 +2,7 @@ const { logger } = require('@qubic/dev-utils');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const Dotenv = require('dotenv-webpack');
+const SizePlugin = require('size-plugin');
 const ora = require('ora');
 
 const prodConfig = require('../config/webpack.config.prod');
@@ -49,6 +50,10 @@ const startBuild = (options) => {
     }),
   );
 
+  compiler.hooks.afterEmit.tap('Qubic', () => {
+    spinner.stop();
+  });
+
   compiler.run((error, stats) => {
     if (error || stats.hasErrors()) {
       // Handle errors here
@@ -62,6 +67,8 @@ const startBuild = (options) => {
     // Done processing
     spinner.stop();
   });
+
+  compiler.apply(new SizePlugin());
 };
 
 module.exports = {
