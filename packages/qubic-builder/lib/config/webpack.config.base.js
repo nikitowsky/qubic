@@ -5,7 +5,7 @@ const { constants, buildStyleLoader, buildWebpackAliases } = require('./utils');
 
 const baseConfig = {
   entry: {
-    bundle: ['@babel/polyfill', constants.paths.source],
+    bundle: [constants.paths.source],
   },
 
   output: {
@@ -21,17 +21,16 @@ const baseConfig = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: true,
-              plugins: ['react-hot-loader/babel'],
-              presets: ['@babel/react', '@babel/typescript'],
-            },
-          },
-          {
             loader: 'awesome-typescript-loader',
             options: {
               silent: true,
+              useTranspileModule: true,
+              useBabel: true,
+              babelOptions: {
+                babelrc: false,
+                plugins: ['react-hot-loader/babel'],
+              },
+              babelCore: '@babel/core',
             },
           },
         ],

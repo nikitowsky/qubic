@@ -37,13 +37,6 @@
     source-map "^0.5.0"
     trim-right "^1.0.1"
 
-"@babel/helper-builder-react-jsx@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/helper-builder-react-jsx/-/helper-builder-react-jsx-7.0.0.tgz#fa154cb53eb918cf2a9a7ce928e29eb649c5acdb"
-  dependencies:
-    "@babel/types" "^7.0.0"
-    esutils "^2.0.0"
-
 "@babel/helper-function-name@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/helper-function-name/-/helper-function-name-7.0.0.tgz#a68cc8d04420ccc663dd258f9cc41b8261efa2d4"
@@ -57,10 +50,6 @@
   resolved "https://registry.yarnpkg.com/@babel/helper-get-function-arity/-/helper-get-function-arity-7.0.0.tgz#83572d4320e2a4657263734113c42868b64e49c3"
   dependencies:
     "@babel/types" "^7.0.0"
-
-"@babel/helper-plugin-utils@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0.tgz#bbb3fbee98661c569034237cc03967ba99b4f250"
 
 "@babel/helper-split-export-declaration@^7.0.0":
   version "7.0.0"
@@ -87,77 +76,6 @@
 "@babel/parser@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.0.0.tgz#697655183394facffb063437ddf52c0277698775"
-
-"@babel/plugin-syntax-jsx@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-jsx/-/plugin-syntax-jsx-7.0.0.tgz#034d5e2b4e14ccaea2e4c137af7e4afb39375ffd"
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.0.0"
-
-"@babel/plugin-syntax-typescript@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-typescript/-/plugin-syntax-typescript-7.0.0.tgz#90f4fe0a741ae9c0dcdc3017717c05a0cbbd5158"
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.0.0"
-
-"@babel/plugin-transform-react-display-name@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-display-name/-/plugin-transform-react-display-name-7.0.0.tgz#93759e6c023782e52c2da3b75eca60d4f10533ee"
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.0.0"
-
-"@babel/plugin-transform-react-jsx-self@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx-self/-/plugin-transform-react-jsx-self-7.0.0.tgz#a84bb70fea302d915ea81d9809e628266bb0bc11"
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/plugin-syntax-jsx" "^7.0.0"
-
-"@babel/plugin-transform-react-jsx-source@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx-source/-/plugin-transform-react-jsx-source-7.0.0.tgz#28e00584f9598c0dd279f6280eee213fa0121c3c"
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/plugin-syntax-jsx" "^7.0.0"
-
-"@babel/plugin-transform-react-jsx@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx/-/plugin-transform-react-jsx-7.0.0.tgz#524379e4eca5363cd10c4446ba163f093da75f3e"
-  dependencies:
-    "@babel/helper-builder-react-jsx" "^7.0.0"
-    "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/plugin-syntax-jsx" "^7.0.0"
-
-"@babel/plugin-transform-typescript@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-typescript/-/plugin-transform-typescript-7.0.0.tgz#71bf13cae08117ae5dc1caec5b90938d8091a01e"
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/plugin-syntax-typescript" "^7.0.0"
-
-"@babel/polyfill@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.0.0.tgz#c8ff65c9ec3be6a1ba10113ebd40e8750fb90bff"
-  dependencies:
-    core-js "^2.5.7"
-    regenerator-runtime "^0.11.1"
-
-"@babel/preset-react@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.0.0.tgz#e86b4b3d99433c7b3e9e91747e2653958bc6b3c0"
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/plugin-transform-react-display-name" "^7.0.0"
-    "@babel/plugin-transform-react-jsx" "^7.0.0"
-    "@babel/plugin-transform-react-jsx-self" "^7.0.0"
-    "@babel/plugin-transform-react-jsx-source" "^7.0.0"
-
-"@babel/preset-typescript@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.0.0.tgz#1e65c8b863ff5b290f070d999c810bb48a8e3904"
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/plugin-transform-typescript" "^7.0.0"
 
 "@babel/template@^7.0.0":
   version "7.0.0"
@@ -1134,15 +1052,6 @@ babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
-babel-loader@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.0.0.tgz#c42f2bef268d0d8bb4ceec5d02b540a9055d58a0"
-  dependencies:
-    find-cache-dir "^1.0.0"
-    loader-utils "^1.0.2"
-    mkdirp "^0.5.1"
-    util.promisify "^1.0.0"
-
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
@@ -1824,10 +1733,6 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-core-js@^2.5.7:
-  version "2.5.7"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
-
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
@@ -2424,7 +2329,7 @@ estraverse@^4.1.0, estraverse@^4.1.1:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
 
-esutils@^2.0.0, esutils@^2.0.2:
+esutils@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
 
@@ -5192,10 +5097,6 @@ regenerate@^1.2.1:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"
 
-regenerator-runtime@^0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
-
 regex-not@^1.0.0, regex-not@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/regex-not/-/regex-not-1.0.2.tgz#1f4ece27e00b0b65e0247a6810e6a85d83a5752c"
@@ -6259,7 +6160,7 @@ util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
 
-util.promisify@1.0.0, util.promisify@^1.0.0:
+util.promisify@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/util.promisify/-/util.promisify-1.0.0.tgz#440f7165a459c9a16dc145eb8e72f35687097030"
   dependencies:

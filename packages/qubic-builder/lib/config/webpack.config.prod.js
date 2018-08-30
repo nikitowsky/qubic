@@ -21,16 +21,10 @@ const prodConfig = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: true,
-              presets: ['@babel/react', '@babel/typescript'],
-            },
-          },
-          {
             loader: 'awesome-typescript-loader',
             options: {
               silent: true,
+              transpileOnly: true,
             },
           },
         ],
