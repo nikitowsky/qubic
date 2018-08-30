@@ -1,6 +1,6 @@
 {
   "name": "@qubic/builder",
-  "version": "2.0.0-beta.10",
+  "version": "2.0.0-beta.11",
   "description": "Webpack based builder",
   "author": "borisowsky <yuzirock@gmail.com>",
   "homepage": "",
@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "@babel/core": "^7.0.0",
-    "@qubic/dev-utils": "2.0.0-beta.10",
+    "@qubic/dev-utils": "2.0.0-beta.11",
     "address": "1.0.3",
     "autoprefixer": "9.1.0",
     "awesome-typescript-loader": "5.2.0",
