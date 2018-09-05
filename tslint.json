@@ -1,0 +1,13 @@
+{
+  "extends": ["jest"],
+  "rules": {
+    "func-names": false,
+    "import-name": false,
+    "max-line-length": [false],
+    "ter-arrow-parens": [true, "always", { "requireForBlockBody": true }]
+  },
+  "plugins": ["jest"],
+  "env": {
+    "browser": true
+  }
+}

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const program = require('commander');
+import * as program from 'commander';
 
-const dev = require('./commands/dev');
-const build = require('./commands/build');
-const clean = require('./commands/clean');
+import * as dev from './commands/dev';
+import * as build from './commands/build';
+import * as clean from './commands/clean';
 
 program
   .command('dev', 'Run development server')

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-const { logger } = require('@qubic/dev-utils');
-const chalk = require('chalk');
-const inquirer = require('inquirer');
-const path = require('path');
-const validate = require('validate-npm-package-name');
+import { logger } from '@qubic/dev-utils';
+import * as path from 'path';
+import chalk from 'chalk';
+const inquirer = require('inquirer') as any;
+const validate = require('validate-npm-package-name') as any;
 
-const { copyTemplate, createFolder, installDependencies, toKebabCase } = require('./utils');
+import { copyTemplate, createFolder, installDependencies, toKebabCase } from './utils';
 
 /** Script execution folder (project folder) */
 const contextDir = process.cwd();
@@ -17,8 +17,8 @@ inquirer
       name: 'name',
       message: 'Project name?',
       default: 'qubic-app',
-      filter: (input) => toKebabCase(input),
-      validate: (input) => {
+      filter: (input: string) => toKebabCase(input),
+      validate: (input: string) => {
         const validation = validate(input);
 
         if (validation.validForNewPackages && validation.validForOldPackages) {
@@ -29,7 +29,7 @@ inquirer
       },
     },
   ])
-  .then(async ({ name }) => {
+  .then(async ({ name }: { name: string }) => {
     const projectFolder = path.join(contextDir, name);
 
     logger.info(`Create folder ${chalk.yellow(projectFolder)}...`);
@@ -42,32 +42,28 @@ inquirer
     // Copy project template
     await copyTemplate(contextDir, name);
 
-    logger.info(`Install dependencies:`);
-    console.log(chalk.yellow(' - @qubic/builder'));
-    console.log(chalk.yellow(' - react'));
-    console.log(chalk.yellow(' - react-dom'));
-    console.log(chalk.yellow(' - react-hot-loader'));
-    console.log(chalk.yellow(' - typescript'));
-    console.log('');
+    logger.info(`Install dependencies: ${chalk.yellow('qubic, react, typescript dependencies')}...`);
+    logger.br();
 
     // Install dependencies
     const installation = installDependencies(projectFolder);
 
     try {
+      // @ts-ignore
       installation.stdout.pipe(process.stdout);
     } catch (e) {
       // Do nothing on errors
     }
 
-    console.log();
+    logger.br();
     logger.info('Now you can start by following these commands:');
-    console.log('');
+    logger.br();
     console.log(`   ${chalk.white(`cd ${name}`)}`);
-    console.log('');
+    logger.br();
     console.log(`   ${chalk.white('yarn start')} - start development server`);
     console.log(`   ${chalk.white('yarn build')} - build project`);
     console.log(`   ${chalk.white('yarn clean')} - clean ${chalk.yellow('dist')} folder`);
   })
-  .catch((e) => {
+  .catch((e: Error) => {
     logger.error('Cannot init project, reason:', e.message);
   });

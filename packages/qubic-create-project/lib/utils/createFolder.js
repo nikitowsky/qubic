@@ -1,22 +1,21 @@
-const chalk = require('chalk');
-const fs = require('fs-extra');
-const path = require('path');
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var fs = require("fs-extra");
+var path = require("path");
+var chalk_1 = require("chalk");
 /**
- * TODO: Describe function
+ * Creates project folder
  *
- * @param {*} directory
- * @param {*} projectName
+ * @param {*} directory Where to create folder
+ * @param {*} projectName Folder name
  */
-const createFolder = (directory, projectName) => {
-  const directoryPath = path.join(directory, projectName);
-  const directoryAlreadyExist = fs.existsSync(directoryPath);
-
-  if (!directoryAlreadyExist) {
-    return fs.mkdir(directoryPath);
-  }
-
-  throw new Error(`Folder ${chalk.white(projectName)} already exists!`);
+var createFolder = function (directory, projectName) {
+    var directoryPath = path.join(directory, projectName);
+    var directoryAlreadyExist = fs.existsSync(directoryPath);
+    if (!directoryAlreadyExist) {
+        return fs.mkdir(directoryPath);
+    }
+    throw new Error("Folder " + chalk_1.default.white(projectName) + " already exists!");
 };
-
-module.exports = createFolder;
+exports.default = createFolder;
+//# sourceMappingURL=createFolder.js.map

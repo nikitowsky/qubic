@@ -1,18 +1,15 @@
-const { logger } = require('@qubic/dev-utils');
-const rimraf = require('rimraf');
-const ora = require('ora');
-
-const { constants } = require('../config/utils');
-
-const startClean = () => {
-  const spinner = ora(`Cleaning ${constants.paths.outputDir}...`).start();
-
-  rimraf(constants.paths.outputDir, () => {
-    spinner.stop();
-    logger.info('Successfully cleaned');
-  });
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var logger = require('@qubic/dev-utils').logger;
+var rimraf = require("rimraf");
+var ora = require("ora");
+var utils_1 = require("../config/utils");
+var startClean = function () {
+    var spinner = ora("Cleaning " + utils_1.constants.paths.outputDir + "...").start();
+    rimraf(utils_1.constants.paths.outputDir, function () {
+        spinner.stop();
+        logger.info('Successfully cleaned');
+    });
 };
-
-module.exports = {
-  startClean,
-};
+exports.startClean = startClean;
+//# sourceMappingURL=clean.js.map

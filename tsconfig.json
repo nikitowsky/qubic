@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "lib": ["esnext", "dom"],
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "composite": true,
+    "declaration": true
+  },
+  "references": [
+    {
+      "path": "./packages/qubic-builder/tsconfig.json"
+    },
+    {
+      "path": "./packages/qubic-create-project/tsconfig.json"
+    },
+    {
+      "path": "./packages/qubic-dev-utils/tsconfig.json"
+    }
+  ]
+}

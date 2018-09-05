@@ -1,30 +1,28 @@
-const path = require('path');
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var path = require("path");
+// TODO: Rename to CONTEXT_DIR
 /** Script execution folder (project folder) */
-const contextDir = process.cwd();
-
+var contextDir = process.cwd();
+exports.contextDir = contextDir;
 /**
  * Important files paths
  */
-const paths = {
-  outputDir: path.join(contextDir, 'dist'),
-  source: path.join(contextDir, 'src/index.tsx'),
-  template: path.join(contextDir, 'src/index.html'),
+var paths = {
+    outputDir: path.join(contextDir, 'dist'),
+    source: path.join(contextDir, 'src/index.tsx'),
+    template: path.join(contextDir, 'src/index.html'),
 };
-
+exports.paths = paths;
 /**
  * Regular expressions for Webpack
  */
-const regexp = {
-  css: /\.(css|scss|sass)$/,
-  cssModules: /\.module\.(css|scss|sass)$/,
-  files: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf)$/,
-  graphql: /\.(graphql|gql)$/,
-  typescript: /\.(ts|tsx)$/,
+var regexp = {
+    css: /\.(css|scss|sass)$/,
+    cssModules: /\.module\.(css|scss|sass)$/,
+    files: /\.(png|jpg|jpeg|webp|gif|svg|woff|woff2|eot|ttf)$/,
+    graphql: /\.(graphql|gql)$/,
+    typescript: /\.(ts|tsx)$/,
 };
-
-module.exports = {
-  contextDir,
-  paths,
-  regexp,
-};
+exports.regexp = regexp;
+//# sourceMappingURL=constants.js.map

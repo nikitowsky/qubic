@@ -1,33 +1,25 @@
-const address = require('address');
-const idx = require('idx');
-const os = require('os');
-
-const validateNetworkAddress = (address) => {
-  return /^10[.]|^172[.](1[6-9]|2[0-9]|3[0-1])[.]|^192[.]168[.]/.test(address);
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var address = require('address');
+var validateNetworkAddress = function (address) {
+    return /^10[.]|^172[.](1[6-9]|2[0-9]|3[0-1])[.]|^192[.]168[.]/.test(address);
 };
-
 /**
  * Return active development server URLs
  *
  * @param {number} port development server port
  */
-const prepareURLs = (port) => {
-  const local = encodeURI(`http://localhost:${port}`);
-  let network;
-
-  const urls = {
-    local,
-  };
-
-  // Wi-fi network address, so you can visit server by your IP address
-  let networkAddress = address.ip();
-
-  if (networkAddress && validateNetworkAddress(networkAddress)) {
-    networkUrl = encodeURI(`http://${networkAddress}:${port}`);
-    urls.network = networkUrl;
-  }
-
-  return urls;
+var prepareURLs = function (port) {
+    var local = encodeURI("http://localhost:" + port);
+    var urls = {
+        local: local,
+    };
+    // Wi-fi network address, so you can visit server by your IP address
+    var networkAddress = address.ip();
+    if (networkAddress && validateNetworkAddress(networkAddress)) {
+        urls.network = encodeURI("http://" + networkAddress + ":" + port);
+    }
+    return urls;
 };
-
-module.exports = prepareURLs;
+exports.default = prepareURLs;
+//# sourceMappingURL=prepareURLs.js.map

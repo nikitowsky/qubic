@@ -1,13 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Converts incoming input to kebab-case string
- *
- * @param {string} string
  */
-const toKebabCase = (string) => {
-  return string
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/[\s_]+/g, '-')
-    .toLowerCase();
+var toKebabCase = function (string) {
+    return string
+        .replace(/([a-z])([A-Z])/g, '$1-$2')
+        .replace(/[\s_]+/g, '-')
+        .toLowerCase();
 };
-
-module.exports = toKebabCase;
+exports.default = toKebabCase;
+//# sourceMappingURL=toKebabCase.js.map

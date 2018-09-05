@@ -1,14 +1,12 @@
-const merge = require('webpack-merge');
-const { CheckerPlugin } = require('awesome-typescript-loader');
-
-const baseConfig = require('./webpack.config.base');
-
-const devConfig = {
-  mode: 'development',
-
-  devtool: 'cheap-module-eval-source-map',
-
-  plugins: [new CheckerPlugin()],
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var merge = require("webpack-merge");
+var awesome_typescript_loader_1 = require("awesome-typescript-loader");
+var webpack_config_base_1 = require("./webpack.config.base");
+var devConfig = {
+    mode: 'development',
+    devtool: 'cheap-module-eval-source-map',
+    plugins: [new awesome_typescript_loader_1.CheckerPlugin()],
 };
-
-module.exports = merge(baseConfig, devConfig);
+exports.default = merge(webpack_config_base_1.default, devConfig);
+//# sourceMappingURL=webpack.config.dev.js.map

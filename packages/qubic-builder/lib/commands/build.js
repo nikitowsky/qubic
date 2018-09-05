@@ -1,76 +1,59 @@
-const { logger } = require('@qubic/dev-utils');
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const Dotenv = require('dotenv-webpack');
-const SizePlugin = require('size-plugin');
-const ora = require('ora');
-
-const prodConfig = require('../config/webpack.config.prod');
-const { buildDotenvPath } = require('../config/utils');
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var logger = require('@qubic/dev-utils').logger;
+var SizePlugin = require('size-plugin');
+var Dotenv = require("dotenv-webpack");
+var merge = require("webpack-merge");
+var ora = require("ora");
+var webpack = require("webpack");
+var webpack_config_prod_1 = require("../config/webpack.config.prod");
+var utils_1 = require("../config/utils");
 /**
  * Prepare production config
- *
- * @param {object} options
- * @param {string} options.env=production environment variable
  */
-const prepareProdConfig = (options) => {
-  const config = merge(prodConfig, {
-    plugins: [
-      new Dotenv({
-        path: buildDotenvPath(options.env),
-        silent: true,
-        systemvars: true,
-      }),
-    ],
-  });
-
-  return config;
+var prepareProdConfig = function (_a) {
+    var _b = _a.env, env = _b === void 0 ? 'production' : _b;
+    var config = merge(webpack_config_prod_1.default, {
+        plugins: [
+            new Dotenv({
+                path: utils_1.buildDotenvPath(env),
+                silent: true,
+                systemvars: true,
+            }),
+        ],
+    });
+    return config;
 };
-
 /**
  * Build project using Webapck
- *
- * @param {object} options production config settings
- * @param {string} options.env=development environment variable, useful in .env files
  */
-const startBuild = (options) => {
-  const config = prepareProdConfig({ env: options.env });
-  const spinner = ora(`Building ${options.env}...\n`).start();
-  const compiler = webpack(config);
-
-  // No deprecation errors unless built-in webpack.ProgressPlguin dosen't use hooks api
-  process.noDeprecation = true;
-
-  compiler.apply(
-    new webpack.ProgressPlugin((precentage) => {
-      const computedPrecentage = (precentage * 100).toFixed(0);
-
-      spinner.text = `Building ${options.env} ${computedPrecentage}%...\n`;
-    }),
-  );
-
-  compiler.hooks.afterEmit.tap('Qubic', () => {
-    spinner.stop();
-  });
-
-  compiler.run((error, stats) => {
-    if (error || stats.hasErrors()) {
-      // Handle errors here
-      logger.br();
-      logger.error('Compilation failed, reason:\n');
-
-      spinner.stop();
-      return console.log(error || 'Unknown error :(');
-    }
-
-    // Done processing
-    spinner.stop();
-  });
-
-  compiler.apply(new SizePlugin());
+var startBuild = function (_a) {
+    var _b = _a.env, env = _b === void 0 ? 'production' : _b;
+    var config = prepareProdConfig({ env: env });
+    var spinner = ora("Building " + env + "...\n").start();
+    var compiler = webpack(config);
+    // No deprecation errors unless built-in webpack.ProgressPlguin dosen't use hooks api
+    // @ts-ignore
+    process.noDeprecation = true;
+    compiler.apply(new webpack.ProgressPlugin(function (precentage) {
+        var computedPrecentage = (precentage * 100).toFixed(0);
+        spinner.text = "Building " + env + " " + computedPrecentage + "%...\n";
+    }));
+    compiler.hooks.afterEmit.tap('Qubic', function () {
+        spinner.stop();
+    });
+    compiler.run(function (error, stats) {
+        if (error || stats.hasErrors()) {
+            // Handle errors here
+            logger.br();
+            logger.error('Compilation failed, reason:\n');
+            spinner.stop();
+            return console.log(error || 'Unknown error :(');
+        }
+        // Done processing
+        spinner.stop();
+    });
+    compiler.apply(new SizePlugin());
 };
-
-module.exports = {
-  startBuild,
-};
+exports.startBuild = startBuild;
+//# sourceMappingURL=build.js.map

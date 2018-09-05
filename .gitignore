@@ -2,6 +2,7 @@
 /node_modules
 /packages/**/node_modules
 /packages/**/dist
+/packages/**/lib
 /packages/template
 
 # IDE's

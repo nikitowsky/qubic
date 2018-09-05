@@ -1,24 +1,22 @@
-const path = require('path');
-const fs = require('fs-extra');
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var fs = require("fs-extra");
+var path = require("path");
 /**
  * Folder where to copy
  *
- * @param {*} directory
- * @param {*} projectName
+ * @param {*} directory Path to copy
+ * @param {*} projectName Project name
  */
-const copyTemplate = (directory, projectName) => {
-  const directoryPath = path.join(directory, projectName);
-  const templatePath = path.join(__dirname, '../../template');
-
-  const filesToCopy = ['src', 'package.json', 'tsconfig.json'];
-
-  filesToCopy.forEach((fileName) => {
-    const pathToCopy = path.join(templatePath, fileName);
-    const pathToPaste = path.join(directoryPath, fileName);
-
-    fs.copy(pathToCopy, pathToPaste);
-  });
+var copyTemplate = function (directory, projectName) {
+    var directoryPath = path.join(directory, projectName);
+    var templatePath = path.join(__dirname, '../../template');
+    var filesToCopy = ['src', 'package.json', 'tsconfig.json'];
+    filesToCopy.forEach(function (fileName) {
+        var pathToCopy = path.join(templatePath, fileName);
+        var pathToPaste = path.join(directoryPath, fileName);
+        fs.copy(pathToCopy, pathToPaste);
+    });
 };
-
-module.exports = copyTemplate;
+exports.default = copyTemplate;
+//# sourceMappingURL=copyTemplate.js.map

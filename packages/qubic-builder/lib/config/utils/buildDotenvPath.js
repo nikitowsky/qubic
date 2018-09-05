@@ -1,12 +1,15 @@
-const path = require('path');
-
-const { contextDir } = require('./constants');
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var path = require("path");
+var constants_1 = require("./constants");
 /**
- * Returns path to .env file
+ * Returns path to `.env` file
  *
- * @param {string} env environment (ex. `production`, `stage`, `development`)
+ * @param {string} env Environment variable (ex. `production`, `stage`, `development`)
  */
-const buildDotenvPath = (env = 'development') => path.join(contextDir, `.env.${env}`);
-
-module.exports = buildDotenvPath;
+var buildDotenvPath = function (env) {
+    if (env === void 0) { env = 'development'; }
+    return path.join(constants_1.contextDir, ".env." + env);
+};
+exports.default = buildDotenvPath;
+//# sourceMappingURL=buildDotenvPath.js.map
