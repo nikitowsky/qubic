@@ -5,7 +5,17 @@
   "author": "borisowsky <yuzirock@gmail.com>",
   "repository": "https://github.com/borisowsky/qubic",
   "license": "ISC",
-  "main": "lib/qubic-dev-utils.js",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "start": "yarn dev",
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "publish": "npm publish",
+    "prepublish": "yarn build",
+    "test": "jest"
+  },
   "directories": {
     "lib": "lib"
   },

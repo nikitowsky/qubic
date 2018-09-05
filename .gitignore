@@ -1,13 +1,13 @@
 # Unnecessary foders
-/node_modules
-/packages/**/node_modules
-/packages/**/dist
-/packages/template
+node_modules
+lib
+dist
+packages/template
 
 # IDE's
-/.atom
-/.idea
-/.vscode
+.atom
+.idea
+.vscode
 
 # Other files
 *.log

@@ -5,8 +5,17 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "publish": "lerna run publish",
+    "build": "lerna run build"
+  },
   "devDependencies": {
     "lerna": "^3.0.1",
     "prettier": "^1.14.2"
+  },
+  "dependencies": {
+    "concurrently": "^4.0.1",
+    "tslint": "^5.11.0",
+    "tslint-eslint-rules": "^5.4.0"
   }
 }
