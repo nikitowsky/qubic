@@ -20,16 +20,5 @@
     "moduleResolution": "node",
     "composite": true,
     "declaration": true
-  },
-  "references": [
-    {
-      "path": "./packages/qubic-builder/tsconfig.json"
-    },
-    {
-      "path": "./packages/qubic-create-project/tsconfig.json"
-    },
-    {
-      "path": "./packages/qubic-dev-utils/tsconfig.json"
-    }
-  ]
+  }
 }
