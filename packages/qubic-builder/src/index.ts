@@ -10,7 +10,7 @@ program
   .command('dev', 'Run development server')
   .command('build', 'Build application')
   .command('clean', 'Clean dist folder')
-  .option('--env <value>', 'Environment variable (default: development (dev), production (build))')
+  .option('--env <value>', 'Environment variable')
   .option('-p, --port <value>', 'Development server port (default: 8000)');
 
 program.on('command:dev', () => {
