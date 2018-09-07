@@ -1,46 +1,15 @@
 import { clearConsole, logger } from '@qubic/dev-utils';
-import * as Dotenv from 'dotenv-webpack';
-import * as merge from 'webpack-merge';
-import * as webpack from 'webpack';
-import * as WebpackDevServer from 'webpack-dev-server';
 import chalk from 'chalk';
 
-import devConfig from '../config/webpack.config.dev';
-import { prepareURLs, openTab, buildDotenvPath } from '../config/utils';
+import QubicBuilder from '../QubicBuilder';
+import QubicDevServer from '../QubicDevServer';
 
-/** TODO: Move to dev-utils */
+import webpackConfig from '../config/webpack.config.dev';
+import { openTab } from '../config/utils';
+
+/** Make link looks like web link */
 const decorateLink = (link: string) => {
   return chalk.cyan.underline(link);
-};
-
-/** Development server config */
-type TDevConfig = {
-  /** Server url */
-  url: string;
-  /** Environment variable (default: "development") */
-  env?: string;
-};
-
-/**
- * Prepare development server config
- */
-const prepareDevConfig = (options: TDevConfig) => {
-  const config = merge(devConfig, {
-    entry: {
-      bundle: [`webpack-dev-server/client?${options.url}`, 'webpack/hot/dev-server'],
-    },
-
-    plugins: [
-      new Dotenv({
-        path: buildDotenvPath(options.env),
-        silent: true,
-        systemvars: true,
-      }),
-      new webpack.HotModuleReplacementPlugin(),
-    ],
-  });
-
-  return config;
 };
 
 type DevServerOptions = {
@@ -55,58 +24,46 @@ type DevServerOptions = {
  */
 const startServer = (options: DevServerOptions) => {
   // Define development server default options
-  const env = options.env;
+  const env = options.env || 'development';
 
-  // Webpack Dev Server options
-  const webpackDevServerOptions = {
-    historyApiFallback: true,
-    host: '0.0.0.0',
-    hot: true,
-    inline: true,
-    noInfo: true,
-    overlay: true,
-    port: options.port || 8000,
-  };
+  const qubicBuilder = new QubicBuilder({ env, webpackConfig });
+  const qubicDevServer = new QubicDevServer({ env, webpackConfig: qubicBuilder.config });
 
-  // Build URLs, use local to open browser tab
-  const { local, network } = prepareURLs(webpackDevServerOptions.port);
-
-  // Webpack compiler
-  const config = prepareDevConfig({ url: local, env });
-  const compiler = webpack(config);
-
-  // Define Webpack Dev Server instance
-  const devServer = new WebpackDevServer(compiler, webpackDevServerOptions);
-
+  const server = qubicDevServer.start();
   const isInteractive = process.stdout.isTTY;
 
-  devServer.listen(webpackDevServerOptions.port, webpackDevServerOptions.host, (error) => {
-    if (error) {
-      logger.error(error);
-    }
+  server
+    .then((instance) => {
+      try {
+        openTab(qubicDevServer.localURL);
+      } catch (e) {
+        logger.warning(e.message);
+      }
 
-    try {
-      openTab(local);
-    } catch (e) {
-      logger.warning(e.message, '\n');
-    }
+      if (isInteractive) {
+        clearConsole();
+      }
 
-    if (isInteractive) {
-      clearConsole();
-    }
+      logger.showVersion();
+      logger.info(`Server started with ${chalk.white(env)} environment.`);
+      logger.info('It available on:\n');
 
-    logger.info('You can visit your development server:\n');
-    local && console.log('   Local:  ', decorateLink(local));
-    network && console.log('   Network:', decorateLink(network));
-    logger.br();
+      qubicDevServer.localURL && console.log('   Local:  ', decorateLink(qubicDevServer.localURL));
+      qubicDevServer.publicURL && console.log('   Network:', decorateLink(qubicDevServer.publicURL));
 
-    (['SIGINT', 'SIGTERM'] as NodeJS.Signals[]).forEach((signal) => {
-      process.on(signal, () => {
-        devServer.close();
-        process.exit();
+      logger.br();
+
+      (['SIGINT', 'SIGTERM'] as NodeJS.Signals[]).forEach((signal) => {
+        process.on(signal, () => {
+          // @ts-ignore
+          instance.close();
+          process.exit();
+        });
       });
+    })
+    .catch((error: Error) => {
+      logger.error(error.message);
     });
-  });
 };
 
 export { startServer };

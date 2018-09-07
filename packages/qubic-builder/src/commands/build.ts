@@ -1,37 +1,24 @@
-const { logger } = require('@qubic/dev-utils') as any;
-const SizePlugin = require('size-plugin') as any;
-import * as Dotenv from 'dotenv-webpack';
-import * as merge from 'webpack-merge';
+import { logger } from '@qubic/dev-utils';
 import * as ora from 'ora';
 import * as webpack from 'webpack';
+// @ts-ignore
+import * as SizePlugin from 'size-plugin';
+import chalk from 'chalk';
 
-import prodConfig from '../config/webpack.config.prod';
-import { buildDotenvPath } from '../config/utils';
-
-/**
- * Prepare production config
- */
-const prepareProdConfig = ({ env = 'production' }) => {
-  const config = merge(prodConfig, {
-    plugins: [
-      new Dotenv({
-        path: buildDotenvPath(env),
-        silent: true,
-        systemvars: true,
-      }),
-    ],
-  });
-
-  return config;
-};
+import QubicBuilder from '../QubicBuilder';
+import webpackConfig from '../config/webpack.config.prod';
 
 /**
  * Build project using Webapck
  */
 const startBuild = ({ env = 'production' }) => {
-  const config = prepareProdConfig({ env });
+  const qubicBuilder = new QubicBuilder({ env, webpackConfig });
+
+  logger.showVersion();
+  logger.br();
+
   const spinner = ora(`Building ${env}...\n`).start();
-  const compiler = webpack(config);
+  const { compiler } = qubicBuilder;
 
   // No deprecation errors unless built-in webpack.ProgressPlguin dosen't use hooks api
   // @ts-ignore
@@ -41,7 +28,7 @@ const startBuild = ({ env = 'production' }) => {
     new webpack.ProgressPlugin((precentage) => {
       const computedPrecentage = (precentage * 100).toFixed(0);
 
-      spinner.text = `Building ${env} ${computedPrecentage}%...\n`;
+      spinner.text = `Building ${chalk.white(env)} ${computedPrecentage}%...\n`;
     }),
   );
 
@@ -56,7 +43,7 @@ const startBuild = ({ env = 'production' }) => {
       logger.error('Compilation failed, reason:\n');
 
       spinner.stop();
-      return console.log(error || 'Unknown error :(');
+      return console.log(error.message || 'Unknown error :(');
     }
 
     // Done processing

@@ -3,7 +3,7 @@ import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { Configuration } from 'webpack';
 
 import baseConfig from './webpack.config.base';
-import { constants, buildStyleLoader } from './utils';
+import { constants, getStyleLoaders } from './utils';
 
 const prodConfig: Configuration = {
   mode: 'production',
@@ -32,12 +32,12 @@ const prodConfig: Configuration = {
       {
         test: constants.regexp.css,
         exclude: constants.regexp.cssModules,
-        use: buildStyleLoader({ extractFile: true }),
+        use: getStyleLoaders({ extractFile: true }),
       },
       {
         test: constants.regexp.cssModules,
-        use: buildStyleLoader({
-          cssModules: true,
+        use: getStyleLoaders({
+          useCSSModules: true,
           extractFile: true,
         }),
       },

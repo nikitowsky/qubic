@@ -1,6 +1,6 @@
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
-import { constants, buildStyleLoader, buildWebpackAliases } from './utils';
+import { constants, getStyleLoaders } from './utils';
 
 const baseConfig = {
   entry: {
@@ -37,11 +37,11 @@ const baseConfig = {
       {
         test: constants.regexp.css,
         exclude: constants.regexp.cssModules,
-        use: buildStyleLoader(),
+        use: getStyleLoaders(),
       },
       {
         test: constants.regexp.cssModules,
-        use: buildStyleLoader({ cssModules: true }),
+        use: getStyleLoaders({ useCSSModules: true }),
       },
       {
         test: constants.regexp.files,
@@ -60,7 +60,6 @@ const baseConfig = {
 
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    alias: buildWebpackAliases(),
   },
 
   plugins: [
