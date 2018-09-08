@@ -1,16 +1,10 @@
 import { clearConsole, logger } from '@qubic/dev-utils';
-import chalk from 'chalk';
 
 import QubicBuilder from '../QubicBuilder';
 import QubicDevServer from '../QubicDevServer';
 
 import webpackConfig from '../config/webpack.config.dev';
 import { openTab } from '../config/utils';
-
-/** Make link looks like web link */
-const decorateLink = (link: string) => {
-  return chalk.cyan.underline(link);
-};
 
 type DevServerOptions = {
   /** Development environment variable, useful in .env files */
@@ -32,26 +26,26 @@ const startServer = (options: DevServerOptions) => {
   const server = qubicDevServer.start();
   const isInteractive = process.stdout.isTTY;
 
+  qubicDevServer.compiler.hooks.invalid.tap('invalid', () => {
+    if (isInteractive) {
+      clearConsole();
+    }
+
+    logger.qubic('Compiling...');
+  });
+
   server
     .then((instance) => {
+      if (isInteractive) {
+        clearConsole();
+        logger.qubic('Compiling...');
+      }
+
       try {
         openTab(qubicDevServer.localURL);
       } catch (e) {
         logger.warning(e.message);
       }
-
-      if (isInteractive) {
-        clearConsole();
-      }
-
-      logger.showVersion();
-      logger.info(`Server started with ${chalk.white(env)} environment.`);
-      logger.info('It available on:\n');
-
-      qubicDevServer.localURL && console.log('   Local:  ', decorateLink(qubicDevServer.localURL));
-      qubicDevServer.publicURL && console.log('   Network:', decorateLink(qubicDevServer.publicURL));
-
-      logger.br();
 
       (['SIGINT', 'SIGTERM'] as NodeJS.Signals[]).forEach((signal) => {
         process.on(signal, () => {
