@@ -12,7 +12,6 @@
     "start": "yarn dev",
     "dev": "tsc --watch",
     "build": "tsc",
-    "publish": "npm publish",
     "prepare": "yarn build",
     "test": "jest"
   },
