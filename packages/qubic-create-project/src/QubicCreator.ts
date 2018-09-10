@@ -66,7 +66,7 @@ export default class QubicCreator {
     const packageManager = getPackageManager();
 
     const packages = [
-      '@qubic/builder@2.0.0-beta.12',
+      '@qubic/builder@2.0.0-beta.13',
       '@types/react-dom',
       '@types/react-hot-loader',
       '@types/react',

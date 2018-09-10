@@ -1,6 +1,6 @@
 {
   "name": "@qubic/create-project",
-  "version": "2.0.0-beta.12",
+  "version": "2.0.0-beta.13",
   "description": "Just an CLI to create base project",
   "author": "borisowsky <yuzirock@gmail.com>",
   "repository": "https://github.com/borisowsky/qubic",
@@ -27,7 +27,7 @@
     "lib"
   ],
   "dependencies": {
-    "@qubic/dev-utils": "2.0.0-beta.12",
+    "@qubic/dev-utils": "2.0.0-beta.13",
     "@types/fs-extra": "^5.0.4",
     "@types/inquirer": "^0.0.43",
     "chalk": "2.4.1",

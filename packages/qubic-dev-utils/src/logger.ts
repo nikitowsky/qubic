@@ -22,7 +22,7 @@ const warning = (...message: any[]) => {
 
 const showVersion = () => {
   // TODO: Get version from package.json
-  const message = chalk.bold('2.0.0-beta.12');
+  const message = chalk.bold('2.0.0-beta.13');
   qubic(message);
 };
 
