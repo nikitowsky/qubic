@@ -12,7 +12,7 @@
     "start": "yarn dev",
     "dev": "tsc --watch",
     "build": "tsc",
-    "prepublish": "yarn build",
+    "prepare": "yarn build",
     "test": "jest"
   },
   "bin": {
