@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint:recommended", "tslint-config-prettier"],
+  "extends": ["tslint-config-prettier"],
   "rules": {
     "arrow-parens": true,
     "func-names": false,

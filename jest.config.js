@@ -1,8 +1,9 @@
 module.exports = {
-  roots: ['<rootDir>/packages'],
+  roots: ['<rootDir>'],
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.ts$',
-  moduleFileExtensions: ['ts'],
+  moduleDirectories: ['node_modules'],
+  moduleFileExtensions: ['ts', 'js'],
 };
