@@ -1,20 +1,25 @@
 {
   "name": "qubic",
-  "version": "2.0.0-beta.13",
+  "version": "2.0.0-next.0",
   "private": true,
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "build:all": "lerna run build"
+    "build": "tsc -b",
+    "dev": "tsc -b -w",
+    "test": "jest"
   },
   "devDependencies": {
-    "lerna": "^3.0.1",
-    "prettier": "^1.14.2"
+    "jest": "^23.6.0",
+    "prettier": "^1.14.2",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0"
   },
   "dependencies": {
-    "concurrently": "^4.0.1",
-    "tslint": "^5.11.0",
-    "tslint-eslint-rules": "^5.4.0"
+    "@types/jest": "^23.3.3",
+    "lerna": "^3.0.1",
+    "ts-jest": "^23.10.3",
+    "typescript": "^3.1.1"
   }
 }

@@ -1,28 +1,7 @@
 {
   "name": "@qubic/dev-utils",
-  "version": "2.0.0-beta.13",
-  "description": "Qubic development utils",
-  "author": "borisowsky <yuzirock@gmail.com>",
-  "repository": "https://github.com/borisowsky/qubic",
-  "license": "ISC",
+  "version": "2.0.0-next.0",
   "main": "lib/index.js",
-  "module": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "scripts": {
-    "start": "yarn dev",
-    "dev": "tsc --watch",
-    "build": "tsc",
-    "prepare": "yarn build",
-    "test": "jest"
-  },
-  "directories": {
-    "lib": "lib"
-  },
-  "files": [
-    "config",
-    "lib"
-  ],
-  "dependencies": {
-    "chalk": "2.4.1"
-  }
+  "license": "MIT"
 }
