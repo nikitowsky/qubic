@@ -2,7 +2,7 @@ import { Environment } from '@qubic/dev-utils';
 import * as webpack from 'webpack';
 import * as merge from 'webpack-merge';
 
-import baseConfig from './config/webpack.config.base';
+import baseConfig from './config/webpack.config.prod';
 
 type Options = {
   dotenv: Environment;
@@ -39,11 +39,7 @@ class QubicBuilder {
    * Prepare Webpack configuration
    */
   private prepareWebpackConfig = (config: webpack.Configuration = baseConfig) => {
-    const { env } = this.options;
-
-    return merge(config, {
-      mode: env,
-    });
+    return merge(config);
   };
 }
 

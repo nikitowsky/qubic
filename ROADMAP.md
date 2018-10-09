@@ -1,6 +1,6 @@
 - [x] Compile .ts, .tsx
-- [ ] Compile Sass, SCSS as .sass, .scss
-- [ ] CSS-Modules as .module.(css|sass|scss)
+- [x] Compile Sass, SCSS as .sass, .scss
+- [x] CSS-Modules as .module.(css|sass|scss)
 - [ ] Add support of GraphQL as .graphql, .gql via graphql-tag/loader
 - [ ] Add support of raw file loading
 - [ ] Add support of babel-macros
