@@ -86,6 +86,11 @@ const config: webpack.Configuration = {
           require.resolve('sass-loader'),
         ],
       },
+      {
+        test: modules.graphql,
+        exclude: /node_modules/,
+        loader: require.resolve('graphql-tag/loader'),
+      },
     ],
   },
 
