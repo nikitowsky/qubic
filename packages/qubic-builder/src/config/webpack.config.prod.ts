@@ -9,13 +9,18 @@ import modules from './modules';
 const config: webpack.Configuration = {
   mode: 'production',
 
+  bail: true,
+
+  devtool: 'source-map',
+
   entry: {
-    bundle: ['@babel/polyfill', path.join(process.cwd(), 'src', 'index.tsx')],
+    bundle: [require.resolve('@babel/polyfill'), path.join(process.cwd(), 'src', 'index.tsx')],
   },
 
   output: {
     path: path.join(process.cwd(), 'dist'),
     filename: '[name].[hash:8].js',
+    chunkFilename: '[name].[chunkhash:8].chunk.js',
     publicPath: '/',
   },
 
@@ -42,54 +47,71 @@ const config: webpack.Configuration = {
           },
         ],
       },
-      /**
-       * Compile ".(css|scss|sass)" files as usual
-       */
       {
-        test: modules.css,
-        exclude: modules.cssModules,
-        use: [
-          MiniCssExtractPlugin.loader,
-          require.resolve('css-loader'),
-          require.resolve('csso-loader'),
+        oneOf: [
+          /**
+           * Compile ".(css|scss|sass)" files as usual
+           */
           {
-            loader: require.resolve('postcss-loader'),
+            test: modules.css,
+            exclude: modules.cssModules,
+            use: [
+              MiniCssExtractPlugin.loader,
+              require.resolve('css-loader'),
+              require.resolve('csso-loader'),
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  plugins: () => [autoprefixer()],
+                },
+              },
+              require.resolve('sass-loader'),
+            ],
+          },
+          /**
+           * Compile ".module.(css|scss|sass)" files as CSS Modules
+           * Spec: https://github.com/css-modules/css-modules
+           */
+          {
+            test: modules.cssModules,
+            use: [
+              MiniCssExtractPlugin.loader,
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  localIdentName: '[local]___[hash:base64:5]',
+                  modules: true,
+                },
+              },
+              require.resolve('csso-loader'),
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  plugins: () => [autoprefixer()],
+                },
+              },
+              require.resolve('sass-loader'),
+            ],
+          },
+          /**
+           * Compile ".(graphql|gql)" files to AST
+           */
+          {
+            test: modules.graphql,
+            exclude: /node_modules/,
+            loader: require.resolve('graphql-tag/loader'),
+          },
+          /**
+           * Load any other resource as file, so we can access to it directly
+           */
+          {
+            loader: require.resolve('file-loader'),
+            exclude: [modules.jsx, modules.tsx, /\.(html|json)$/],
             options: {
-              plugins: () => [autoprefixer()],
+              name: '[name].[hash:8].[ext]',
             },
           },
-          require.resolve('sass-loader'),
         ],
-      },
-      /**
-       * Compile ".module.(css|scss|sass)" files as CSS Modules
-       * Spec: https://github.com/css-modules/css-modules
-       */
-      {
-        test: modules.cssModules,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: require.resolve('css-loader'),
-            options: {
-              localIdentName: '[local]___[hash:base64:5]',
-              modules: true,
-            },
-          },
-          require.resolve('csso-loader'),
-          {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              plugins: () => [autoprefixer()],
-            },
-          },
-          require.resolve('sass-loader'),
-        ],
-      },
-      {
-        test: modules.graphql,
-        exclude: /node_modules/,
-        loader: require.resolve('graphql-tag/loader'),
       },
     ],
   },
