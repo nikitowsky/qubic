@@ -1,0 +1,9 @@
+- [x] Compile .ts, .tsx
+- [ ] Compile Sass, SCSS as .sass, .scss
+- [ ] CSS-Modules as .module.(css|sass|scss)
+- [ ] Add support of GraphQL as .graphql, .gql via graphql-tag/loader
+- [ ] Add support of raw file loading
+- [ ] Add support of babel-macros
+- [ ] Add .env support (also allow to use variables defined manually like NODE_ENV=stage qubic build)
+- [ ] Allow to expand config via qubic.config.[environment].(ts|js) and .qubic.(yml|yaml)
+- [ ] Test everything related

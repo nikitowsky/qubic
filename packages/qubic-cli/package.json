@@ -4,7 +4,12 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "license": "MIT",
+  "bin": {
+    "qubic": "lib/index.js",
+    "qb": "lib/index.js"
+  },
   "dependencies": {
-    "@types/node": "^10.11.4"
+    "@types/node": "^10.11.4",
+    "@qubic/builder": "2.0.0-next.0"
   }
 }
