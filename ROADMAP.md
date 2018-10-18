@@ -4,6 +4,7 @@
 - [x] Add support of GraphQL as .graphql, .gql via graphql-tag/loader
 - [x] Add support of raw file loading
 - [ ] Add support of babel-macros
-- [ ] Add .env support (also allow to use variables defined manually like NODE_ENV=stage qubic build)
-- [ ] Allow to expand config via qubic.config.[environment].(ts|js) and .qubic.(yml|yaml)
+- [x] Add .env support (also allow to use variables defined manually like NODE_ENV=stage qubic build)
 - [ ] Test everything related
+- [ ] Implement dev-server
+- [ ] Allow to expand config via qubic.config.[environment].js and .qubic.(yml|yaml)

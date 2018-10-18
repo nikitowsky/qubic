@@ -5,6 +5,8 @@
   "typings": "lib/index.d.ts",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^10.11.4"
+    "@types/dotenv": "^4.0.3",
+    "@types/node": "^10.11.4",
+    "dotenv": "^6.1.0"
   }
 }

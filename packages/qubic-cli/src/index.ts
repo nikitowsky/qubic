@@ -1,15 +1,12 @@
 #!/usr/bin/env node
 
-import QubicBuilder from '@qubic/builder';
+import QubicDevServer from '@qubic/dev-server';
 
-const builder = new QubicBuilder();
+const devServer = new QubicDevServer();
 
-builder.webpackCompiler.run((error, stats) => {
-  if (error) {
-    console.log(error);
-  }
-
-  if (stats.compilation.errors.length > 0) {
-    console.log(stats.compilation.errors);
-  }
-});
+devServer
+  .listen({ host: '0.0.0.0', port: 8000 })
+  .then(() => {
+    console.log('Running at http://localhost:8000');
+  })
+  .catch((e) => console.log(e));

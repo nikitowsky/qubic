@@ -5,6 +5,9 @@
   "typings": "lib/index.d.ts",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^10.11.4"
+    "@qubic/builder": "2.0.0-next.0",
+    "@types/node": "^10.11.4",
+    "@types/webpack-dev-server": "^3.1.1",
+    "webpack-dev-server": "^3.1.9"
   }
 }
