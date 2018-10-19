@@ -3,8 +3,9 @@
 - [x] CSS-Modules as .module.(css|sass|scss)
 - [x] Add support of GraphQL as .graphql, .gql via graphql-tag/loader
 - [x] Add support of raw file loading
-- [ ] Add support of babel-macros
 - [x] Add .env support (also allow to use variables defined manually like NODE_ENV=stage qubic build)
-- [ ] Test everything related
+- [x] Match ts aliases to webpack aliases
 - [ ] Implement dev-server
 - [ ] Allow to expand config via qubic.config.[environment].js and .qubic.(yml|yaml)
+- [ ] Add support of babel-macros
+- [ ] Test everything related

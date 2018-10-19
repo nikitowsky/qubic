@@ -1,4 +1,4 @@
-import { getDotenv, Environment } from '@qubic/dev-utils';
+import { getDotenv, getTSConfigAliases, Environment } from '@qubic/dev-utils';
 import * as webpack from 'webpack';
 import * as merge from 'webpack-merge';
 
@@ -46,6 +46,10 @@ class QubicBuilder {
     const dotenv = incomingDotenv ? incomingDotenv : env;
 
     return merge(config, {
+      resolve: {
+        alias: getTSConfigAliases(),
+      },
+
       plugins: [new webpack.DefinePlugin(getDotenv(dotenv as string))],
     });
   };

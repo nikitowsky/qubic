@@ -1,4 +1,5 @@
 import getDotenv from './getDotenv';
+import getTSConfigAliases from './getTSConfigAliases';
 import isFilenameAllowed from './isFilenameAllowed';
 
 /**
@@ -6,4 +7,4 @@ import isFilenameAllowed from './isFilenameAllowed';
  */
 export type Environment = 'production' | 'development';
 
-export { getDotenv, isFilenameAllowed };
+export { getDotenv, getTSConfigAliases, isFilenameAllowed };

@@ -2,13 +2,17 @@ import * as path from 'path';
 import * as Dotenv from 'dotenv';
 
 const stringify = (obj: any) => {
-  const computed = {};
+  if (obj) {
+    const computed = {};
 
-  Object.keys(obj).forEach((key: any) => {
-    Object.assign(computed, { [key]: JSON.stringify(obj[key]) });
-  });
+    Object.keys(obj).forEach((key: any) => {
+      Object.assign(computed, { [key]: JSON.stringify(obj[key]) });
+    });
 
-  return computed;
+    return computed;
+  }
+
+  return {};
 };
 
 /**

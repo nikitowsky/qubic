@@ -1,8 +1,8 @@
 import * as autoprefixer from 'autoprefixer';
-import * as path from 'path';
 import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
+import paths from './paths';
 import modules from './modules';
 
 const config: webpack.Configuration = {
@@ -17,12 +17,12 @@ const config: webpack.Configuration = {
       require.resolve('webpack-dev-server/client') + '?/',
       require.resolve('webpack/hot/dev-server'),
       require.resolve('@babel/polyfill'),
-      path.join(process.cwd(), 'src', 'index.tsx'),
+      paths.entry,
     ],
   },
 
   output: {
-    path: path.join(process.cwd(), 'dist'),
+    path: paths.dist,
     filename: '[name].[hash:8].js',
     chunkFilename: '[name].[chunkhash:8].chunk.js',
     publicPath: '/',
@@ -136,7 +136,7 @@ const config: webpack.Configuration = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.join(process.cwd(), 'public', 'index.html'),
+      template: paths.template,
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
