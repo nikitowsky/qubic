@@ -1,15 +1,15 @@
 {
-  "name": "@qubic/dev-utils",
+  "name": "@qubic/cli",
   "version": "2.0.0-next.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "license": "MIT",
+  "bin": {
+    "qubic": "lib/index.js",
+    "qb": "lib/index.js"
+  },
   "dependencies": {
-    "@types/dotenv": "^4.0.3",
     "@types/node": "^10.11.4",
-    "address": "^1.0.3",
-    "chalk": "^2.4.1",
-    "dotenv": "^6.1.0",
-    "opn": "^5.4.0"
+    "@qubic/builder": "2.0.0-next.0"
   }
 }

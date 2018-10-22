@@ -1,103 +1,60 @@
+import { getDotenv, getTSConfigAliases, Environment } from '@qubic/dev-utils';
 import * as webpack from 'webpack';
-import * as Dotenv from 'dotenv-webpack';
 import * as merge from 'webpack-merge';
-import * as path from 'path';
 
-enum Environments {
-  PRODUCTION = 'production',
-  DEVELOPMENT = 'development',
-}
+import prodConfig from './config/webpack.config.prod';
+import devConfig from './config/webpack.config.dev';
 
-type Environment = Environments.PRODUCTION | Environments.DEVELOPMENT | string;
-
-type WebpackAliases = {
-  [key: string]: string;
-};
-
-interface BuilderConfig {
+type Options = {
+  dotenv: string;
   env: Environment;
   webpackConfig: webpack.Configuration;
-}
+};
 
-export default class QubicBuilder {
-  dotenv: string;
-  config: webpack.Configuration;
-  compiler: webpack.Compiler;
-  environment: Environment;
+const defaultOptions = {
+  env: 'production' as Environment,
+};
 
-  constructor(options: BuilderConfig) {
-    this.dotenv = this.getDotenvPath(options.env);
-    this.config = this.prepareWebpackConfig(options.webpackConfig);
-    this.compiler = webpack(this.config);
-    this.environment = options.env;
+class QubicBuilder {
+  options: Partial<Options> = {};
+  webpackCompiler: webpack.Compiler;
+
+  constructor(options: Partial<Options> = defaultOptions) {
+    this.options = {
+      ...options,
+      // We need to process Webpack configuration after spreading, becaue we gonna add additional information in this
+      webpackConfig: this.prepareWebpackConfig(options),
+    };
+
+    this.webpackCompiler = this.initWebpackCompiler();
   }
 
   /**
-   * Prepare additional loaders, plugins, etc.
+   * Initialize Webpack compiler
    */
-  private prepareWebpackConfig = (config: webpack.Configuration): webpack.Configuration => {
+  private initWebpackCompiler = () => {
+    const compiler = webpack(this.options.webpackConfig);
+
+    return compiler;
+  };
+
+  /**
+   * Prepare Webpack configuration
+   */
+  private prepareWebpackConfig = (options: Partial<Options>) => {
+    const { env, dotenv: incomingDotenv } = options;
+
+    const config = env === 'production' ? prodConfig : devConfig;
+    const dotenv = incomingDotenv ? incomingDotenv : env;
+
     return merge(config, {
       resolve: {
-        alias: this.getWebpackAliases(),
+        alias: getTSConfigAliases(),
       },
 
-      plugins: [
-        new Dotenv({
-          path: this.dotenv,
-          silent: true,
-          systemvars: true,
-        }),
-      ],
+      plugins: [new webpack.DefinePlugin(getDotenv(dotenv as string))],
     });
   };
-
-  /**
-   * Get path to `.env` file relatively from project context
-   */
-  getDotenvPath = (environment: Environment): string => {
-    const contextDirectory = process.cwd();
-    const dotenvDirectory = path.join(contextDirectory, `.env.${environment}`);
-
-    return dotenvDirectory;
-  };
-
-  /**
-   * Generate Webpack aliases based on tsconfig.json
-   */
-  getWebpackAliases = (): WebpackAliases => {
-    const contextDirectory = process.cwd();
-
-    type CompilerOptions = {
-      [key: string]: any;
-      baseUrl: string;
-      paths: {
-        [key: string]: string[];
-      };
-    };
-
-    const tsConfigPath = path.join(contextDirectory, 'tsconfig.json');
-    const tsConfig = require(tsConfigPath);
-
-    const { compilerOptions } = tsConfig;
-    const { baseUrl, paths } = compilerOptions as CompilerOptions;
-
-    const webpackAliases: WebpackAliases = {};
-
-    if (baseUrl && paths) {
-      // Resolve system-relative path for `baseUrl`
-      const rootDirectory = path.join(contextDirectory, baseUrl);
-
-      Object.entries(paths).forEach(([aliasKey, aliasTemplate]) => {
-        const key = aliasKey.replace('/*', '');
-
-        // As long Webpack dosen't support array as alias (like tsconfig.json does), we always use first alias path
-        const pathToAlias = aliasTemplate[0].replace('/*', '');
-
-        // Build Webpack-friendly alias config
-        webpackAliases[key] = path.join(rootDirectory, pathToAlias);
-      });
-    }
-
-    return webpackAliases;
-  };
 }
+
+export default QubicBuilder;

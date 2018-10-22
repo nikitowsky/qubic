@@ -1,61 +1,128 @@
-import * as merge from 'webpack-merge';
+import * as autoprefixer from 'autoprefixer';
+import * as webpack from 'webpack';
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { Configuration } from 'webpack';
 
-import baseConfig from './webpack.config.base';
-import { constants, getStyleLoaders } from './utils';
+import paths from './paths';
+import modules from './modules';
 
-const prodConfig: Configuration = {
+const config: webpack.Configuration = {
   mode: 'production',
+
+  bail: true,
 
   devtool: 'source-map',
 
+  entry: {
+    bundle: [require.resolve('@babel/polyfill'), paths.entry],
+  },
+
   output: {
-    filename: '[name].[hash].js',
+    path: paths.dist,
+    filename: '[name].[hash:8].js',
+    chunkFilename: '[name].[chunkhash:8].chunk.js',
+    publicPath: '/',
   },
 
   module: {
     rules: [
+      /**
+       * Compile .ts and .tsx files
+       */
       {
-        test: constants.regexp.typescript,
+        test: modules.tsx,
         exclude: /node_modules/,
         use: [
           {
-            loader: 'awesome-typescript-loader',
+            loader: require.resolve('babel-loader'),
             options: {
-              silent: true,
-              transpileOnly: true,
+              babelrc: false,
+              cacheDirectory: true,
+              configFile: false,
+              sourceMaps: false,
+              // TODO: Move to own preset
+              presets: ['@babel/react', '@babel/typescript', ['@babel/env', { modules: false, useBuiltIns: 'usage' }]],
+              plugins: ['@babel/proposal-class-properties'],
             },
           },
         ],
       },
       {
-        test: constants.regexp.css,
-        exclude: constants.regexp.cssModules,
-        use: getStyleLoaders({ extractFile: true }),
-      },
-      {
-        test: constants.regexp.cssModules,
-        use: getStyleLoaders({
-          useCSSModules: true,
-          extractFile: true,
-        }),
-      },
-      {
-        test: constants.regexp.files,
-        loader: 'file-loader',
-        options: {
-          name: '[sha512:hash:base64:7].[ext]',
-        },
-      },
-      {
-        test: constants.regexp.graphql,
-        exclude: /node_modules/,
-        loader: 'graphql-tag/loader',
+        oneOf: [
+          /**
+           * Compile ".(css|scss|sass)" files as usual
+           */
+          {
+            test: modules.css,
+            exclude: modules.cssModules,
+            use: [
+              MiniCssExtractPlugin.loader,
+              require.resolve('css-loader'),
+              require.resolve('csso-loader'),
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  plugins: () => [autoprefixer()],
+                },
+              },
+              require.resolve('sass-loader'),
+            ],
+          },
+          /**
+           * Compile ".module.(css|scss|sass)" files as CSS Modules
+           * Spec: https://github.com/css-modules/css-modules
+           */
+          {
+            test: modules.cssModules,
+            use: [
+              MiniCssExtractPlugin.loader,
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  localIdentName: '[local]___[hash:base64:5]',
+                  modules: true,
+                },
+              },
+              require.resolve('csso-loader'),
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  plugins: () => [autoprefixer()],
+                },
+              },
+              require.resolve('sass-loader'),
+            ],
+          },
+          /**
+           * Compile ".(graphql|gql)" files to AST
+           */
+          {
+            test: modules.graphql,
+            exclude: /node_modules/,
+            loader: require.resolve('graphql-tag/loader'),
+          },
+          /**
+           * Load any other resource as file, so we can access to it directly
+           */
+          {
+            loader: require.resolve('file-loader'),
+            exclude: [modules.jsx, modules.tsx, /\.(html|json)$/],
+            options: {
+              name: '[name].[hash:8].[ext]',
+            },
+          },
+        ],
       },
     ],
   },
 
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
+
+  /**
+   * Code splitting
+   */
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -63,6 +130,13 @@ const prodConfig: Configuration = {
   },
 
   plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: paths.template,
+    }),
+    /**
+     * Extract css as files
+     */
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash:8].css',
       chunkFilename: '[name].[contenthash:8].chunk.css',
@@ -70,4 +144,4 @@ const prodConfig: Configuration = {
   ],
 };
 
-export default merge.smartStrategy({ 'module.rules': 'replace' })(baseConfig, prodConfig);
+export default config;

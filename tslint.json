@@ -1,12 +1,12 @@
 {
-  "extends": ["jest"],
+  "extends": ["tslint-config-prettier"],
   "rules": {
+    "arrow-parens": true,
     "func-names": false,
     "import-name": false,
     "max-line-length": [false],
-    "ter-arrow-parens": [true, "always", { "requireForBlockBody": true }]
+    "no-unused-variable": [true, { "ignore-pattern": "^_" }]
   },
-  "plugins": ["jest"],
   "env": {
     "browser": true
   }

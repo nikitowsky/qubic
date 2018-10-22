@@ -1,24 +1,9 @@
 {
-  "compilerOptions": {
-    "sourceMap": true,
-
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-
-    "lib": ["esnext", "dom"],
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "composite": true,
-    "declaration": true
-  }
+  "files": [],
+  "references": [
+    { "path": "./packages/qubic-builder" },
+    { "path": "./packages/qubic-cli" },
+    { "path": "./packages/qubic-dev-server" },
+    { "path": "./packages/qubic-dev-utils" }
+  ]
 }

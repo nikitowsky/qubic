@@ -1,5 +1,13 @@
-import clearConsole from './clearConsole';
-import getPackageManager from './getPackageManager';
-import logger from './logger';
+import getDotenv from './getDotenv';
+import getTSConfigAliases from './getTSConfigAliases';
+import isFilenameAllowed from './isFilenameAllowed';
+import openTab from './openTab';
+import terminal from './terminal';
+import withHooks from './withHooks';
 
-export { clearConsole, getPackageManager, logger };
+/**
+ * Default environments
+ */
+export type Environment = 'production' | 'development';
+
+export { getDotenv, getTSConfigAliases, isFilenameAllowed, openTab, terminal, withHooks };
