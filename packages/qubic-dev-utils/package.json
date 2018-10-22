@@ -7,6 +7,9 @@
   "dependencies": {
     "@types/dotenv": "^4.0.3",
     "@types/node": "^10.11.4",
-    "dotenv": "^6.1.0"
+    "address": "^1.0.3",
+    "chalk": "^2.4.1",
+    "dotenv": "^6.1.0",
+    "opn": "^5.4.0"
   }
 }

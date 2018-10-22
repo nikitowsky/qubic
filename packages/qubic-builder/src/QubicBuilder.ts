@@ -33,7 +33,9 @@ class QubicBuilder {
    * Initialize Webpack compiler
    */
   private initWebpackCompiler = () => {
-    return webpack(this.options.webpackConfig);
+    const compiler = webpack(this.options.webpackConfig);
+
+    return compiler;
   };
 
   /**
